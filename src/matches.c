@@ -15,12 +15,20 @@ int check_turn()
 	}
 }
 
-
 int check_input(int ramain)
 {
 	if (ramain >= 2 && ramain <= 10) {
 		return 1;
 	} else {
 		return 0;
+	}
+}
+
+int check_turn_inversion(int turn)
+{
+	if(turn == 1) {
+		return 2;
+	} else {
+		return 1;
 	}
 }
