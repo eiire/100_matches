@@ -19,8 +19,8 @@ int check_turn()
 int check_input(int ramain)
 {
 	if (ramain >= 2 && ramain <= 10) {
-		recheck 1;
+		return 1;
 	} else {
-		recheck 0;
+		return 0;
 	}
 }
