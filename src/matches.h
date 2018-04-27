@@ -2,6 +2,7 @@
 #define MATCHES_H
 
 #include <stdio.h>
+
 int check_turn();
 
 #endif
