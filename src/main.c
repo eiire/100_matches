@@ -1,10 +1,11 @@
-#include <stdio.h>
+#include "matches.h"
 
 int main()
 {
-	int matches = 100;
+	printf("Приветствую в игре 100 спичек, я робот, который будет против тебя играть! Выбери каким ты хочешь ходить: ");
+	int turn = check_turn();
 
-	printf("Приветствую в игре 100 спичек, я робот, который будет против тебя играть! Выбери каким ты хочешь ходить.");
+	int input, stroke_check, matches_remain = 100;
 
 	return 0;
 }
