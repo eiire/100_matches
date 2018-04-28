@@ -21,6 +21,7 @@ int main()
 				matches_remain = matches_remain - input;
 				printf("Осталось %d\n", matches_remain);
 			} else {
+				turn = turn_inversion(turn);
 				printf("Вы ввели неверное значение, пожалуйста, повторите попытку: ");
 			}
 		}
