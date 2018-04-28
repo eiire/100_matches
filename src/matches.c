@@ -24,7 +24,7 @@ int check_input(int ramain)
 	}
 }
 
-int check_turn_inversion(int turn)
+int turn_inversion(int turn)
 {
 	if(turn == 1) {
 		return 2;
