@@ -15,9 +15,14 @@ int main()
 			printf("Я взял %d сталось %d. Твой ход!\n", buffer, matches_remain);
 		} else {
 			turn = turn_inversion(turn);
-			scanf("%d", &buffer);
-			matches_remain = matches_remain - buffer;
-			printf("Осталось %d\n", matches_remain);
+			scanf("%d", &input);
+			stroke_check = check_input(input);
+			if (stroke_check == 1) {
+				matches_remain = matches_remain - input;
+				printf("Осталось %d\n", matches_remain);
+			} else {
+				printf("Вы ввели неверное значение, пожалуйста, повторите попытку: ");
+			}
 		}
 	}
 
