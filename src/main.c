@@ -12,39 +12,20 @@ int main()
 		if (turn == 2) {
 			turn = turn_inversion(turn);
 
-			if (matches_remain == 12) {
-				buffer = 10;
-			} else if (matches_remain == 11) {
-				buffer = 9;
-			} else if (matches_remain == 10) {
-				buffer = 8;
-			} else if (matches_remain == 9) {
-				buffer = 7;
-			} else if (matches_remain == 8) {
-				buffer = 6;
-			} else if (matches_remain == 7) {
-				buffer = 5;
-			} else if (matches_remain == 6) {
-				buffer = 4;
-			} else if (matches_remain == 5) {
-				buffer = 3;
-			} else if (matches_remain == 4) {
-				buffer = 2;
-			} else if (matches_remain == 3) {
-				buffer = 1;
-			}
-
-			if (matches_remain > 13) {
-			if (matches_remain % 2 == 0 && comp % 2 == 0) {
-				buffer = 11 - comp;
-			} else if (matches_remain % 2 == 0 && comp % 2 == 1) {
-				buffer = 10 - comp;
-			} else if (matches_remain % 2 == 1 && comp % 2 == 1) {
-				buffer = 11 - comp;
-			} else if (matches_remain % 2 == 1 && comp % 2 == 0) {
-				buffer = 10 - comp;
-			}
-			}
+			if (matches_remain >= 11) {
+				if (matches_remain % 2 == 0 && comp % 2 == 0) {
+					buffer = 11 - comp;
+				} else if (matches_remain % 2 == 0 && comp % 2 == 1) {
+					buffer = 10 - comp;
+				} else if (matches_remain % 2 == 1 && comp % 2 == 1) {
+					buffer = 11 - comp;
+				} else if (matches_remain % 2 == 1 && comp % 2 == 0) {
+					buffer = 10 - comp;
+				}
+			} else if (1 < matches_remain && matches_remain < 11){
+        		buffer = matches_remain - 1;
+    		}
+    		
 			matches_remain = matches_remain - buffer;
 			printf("Я взял %d сталось %d. Твой ход!\n", buffer, matches_remain);
 		} else {
@@ -67,9 +48,33 @@ int main()
 		printf("Вы выиграли!\n");
 	} else if (turn == 2) {
 		printf("Вы выиграли!\n");
-	} else {
+	} else if (turn == 1 && matches_remain < 0) {
 		printf("Вы проиграли!\n");
+	} else {
+		printf("Вы проиграли!");
 	}
 
 	return 0;
 }
+
+			// if (matches_remain == 12) {
+			// 	buffer = 10;
+			// } else if (matches_remain == 11) {
+			// 	buffer = 9;
+			// } else if (matches_remain == 10) {
+			// 	buffer = 8;
+			// } else if (matches_remain == 9) {
+			// 	buffer = 7;
+			// } else if (matches_remain == 8) {
+			// 	buffer = 6;
+			// } else if (matches_remain == 7) {
+			// 	buffer = 5;
+			// } else if (matches_remain == 6) {
+			// 	buffer = 4;
+			// } else if (matches_remain == 5) {
+			// 	buffer = 3;
+			// } else if (matches_remain == 4) {
+			// 	buffer = 2;
+			// } else if (matches_remain == 3) {
+			// 	buffer = 1;
+			// }
