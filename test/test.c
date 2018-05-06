@@ -1,7 +1,7 @@
 #include <ctest.h>
 #include <matches.h>
 
-CTEST(numOfRemain , test_step_hourse)
+CTEST(numOfRemain, check_turn)
 {
 	// GIVEN
 	int check = turn_inversion(1);
