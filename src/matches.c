@@ -3,14 +3,14 @@
 int check_turn()
 {
 	int check;
-	scanf("%d", &check);
+	scanw("%d", &check);
 
 	if (check == 1) {
 		return 1;
 	} else if (check == 2) {
 		return 2;
 	} else {
-		printf("Введено неверное значение, пожалуйста, повторите попытку: ");
+		printw("The entered value is incorrect, please try again: ");
 		return check_turn();
 	}
 }

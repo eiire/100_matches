@@ -2,7 +2,24 @@
 
 int main()
 {
-	printf("Приветствую в игре 100 спичек, я робот, который будет против тебя играть! Выбери каким ты хочешь ходить: ");
+	/*int row, col;
+	const char *hello = "Welcome to the game 100 matches!";
+	const char *robot = "I am a robot that will be against you";
+	const char *choice = "Choose how you want to go: ";
+	const char *won = "You won!";
+	const char *lose = "You lose!";*/
+
+	initscr();	
+
+	getmaxyx(stdscr, row, col);
+
+	curs_set(0);
+	echo();
+
+	mvwprintw(stdscr, 1 , (col - strlen(hello)) / 2, "%s", hello);
+	mvwprintw(stdscr, 2 , (col - strlen(robot)) / 2, "%s", robot);
+	mvwprintw(stdscr, 3 , 0 , "%s", choice);
+
 	int turn = check_turn();
 	int first = turn;
 
@@ -14,29 +31,32 @@ int main()
 			turn = turn_inversion(turn);
 			strategy(matches_remain, first, &buffer);
 			matches_remain = matches_remain - buffer;
-			printf("Я взял %d сталось %d. Твой ход!\n", buffer, matches_remain);
+			printw("I took %d left %d. Your move!\n", buffer, matches_remain);
 		} else {
 			turn = turn_inversion(turn);
-			scanf("%d", &input);
+			scanw("%d", &input);
 			stroke_check = check_input(input);
 			if (stroke_check == 1) {
 				matches_remain = matches_remain - input;
-				printf("Осталось %d\n", matches_remain);
+				printw("Left %d\n", matches_remain);
 			} else {
 				turn = turn_inversion(turn);
-				printf("Вы ввели неверное значение, пожалуйста, повторите попытку: ");
+				printw("You entered an invalid value, please try again: ");
 			}
 		}
 	}
 
 	if (turn == 2 && (matches_remain == 2 || matches_remain == 1
 			|| matches_remain == 0)) {
-		printf("Вы выиграли!\n");
+		mvwprintw(stdscr, row / 2 , (col - strlen(won)) / 2, "%s", won);
 	} else if (turn == 1 && matches_remain < 0) {
-		printf("Вы проиграли!\n");
+		mvwprintw(stdscr, row / 2 , (col - strlen(lose)) / 2, "%s", lose);
 	} else {
-		printf("Вы проиграли!\n");
+		mvwprintw(stdscr, row / 2 , (col - strlen(lose)) / 2, "%s", lose);
 	}
+
+	getch();    
+   	endwin();
 
 	return 0;
 }
