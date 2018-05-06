@@ -8,8 +8,7 @@ int main()
 
 	int input, stroke_check, matches_remain = 100, buffer;
 
-	while (matches_remain >= 0 && matches_remain < 101 
-			&& matches_remain != 2 && matches_remain != 0) {
+	while (matches_remain >= 0 && matches_remain < 101) {
 		if (turn == 2) {
 			turn = turn_inversion(turn);
 			strategy(matches_remain, first, &buffer);
@@ -29,8 +28,7 @@ int main()
 		}
 	}
 
-	if (turn == 2 && (matches_remain == 2 || matches_remain == 1
-			|| matches_remain == 0)) {
+	if (turn == 2 && matches_remain <= 10 && input < 9 && matches_remain > 2) {
 		printf("Вы выиграли!\n");
 	} else if (turn == 1 && matches_remain < 0) {
 		printf("Вы проиграли!\n");
