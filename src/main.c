@@ -2,12 +2,6 @@
 
 int main()
 {
-	/*int row, col;
-	const char *hello = "Welcome to the game 100 matches!";
-	const char *robot = "I am a robot that will be against you";
-	const char *choice = "Choose how you want to go: ";
-	const char *won = "You won!";
-	const char *lose = "You lose!";*/
 
 	initscr();	
 
@@ -16,9 +10,9 @@ int main()
 	curs_set(0);
 	echo();
 
-	mvwprintw(stdscr, 1 , (col - strlen(hello)) / 2, "%s", hello);
-	mvwprintw(stdscr, 2 , (col - strlen(robot)) / 2, "%s", robot);
-	mvwprintw(stdscr, 3 , 0 , "%s", choice);
+	mvwprintw(stdscr, 0 , (col - strlen(hello)) / 2, "%s", hello);
+	mvwprintw(stdscr, 1 , (col - strlen(robot)) / 2, "%s", robot);
+	mvwprintw(stdscr, 2 , 0 , "%s", choice);
 
 	int turn = check_turn();
 	int first = turn;
