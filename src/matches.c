@@ -93,3 +93,14 @@ void strategy(int matches_remain, int first, int *buffer, int input)
  		}
  	}
 }
+
+void check_result(int turn, int matches_remain, int input)
+{
+	if (turn == 2 && matches_remain <= 10 && input < 9 && matches_remain > 2) {
+		printf("Вы выиграли!\n");
+	} else if (turn == 1 && matches_remain < 0) {
+		printf("Вы проиграли!\n");
+	} else {
+		printf("Вы проиграли!\n");
+	}
+}

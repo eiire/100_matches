@@ -28,13 +28,7 @@ int main()
 		}
 	}
 
-	if (turn == 2 && matches_remain <= 10 && input < 9 && matches_remain > 2) {
-		printf("Вы выиграли!\n");
-	} else if (turn == 1 && matches_remain < 0) {
-		printf("Вы проиграли!\n");
-	} else {
-		printf("Вы проиграли!\n");
-	}
+	check_result(turn, matches_remain, input);
 
 	return 0;
 }
