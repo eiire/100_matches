@@ -26,7 +26,7 @@ int check_input(int ramain)
 
 int turn_inversion(int turn)
 {
-	if(turn == 1) {
+	if (turn == 1) {
 		return 2;
 	} else {
 		return 1;
@@ -45,7 +45,7 @@ void strategy(int matches_remain, int first, int *buffer, int input)
  		} else if (78 < matches_remain) {
  			if (first == 2) {
  				*buffer = rand() % 10 + 1;
- 			} else {	
+ 			} else {
  				*buffer = matches_remain - 78;
  			}
  		} else if (67 < matches_remain) {

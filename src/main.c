@@ -8,7 +8,7 @@ int main()
 
 	int input, stroke_check, matches_remain = 100, buffer;
 
-	while (matches_remain >= 0 && matches_remain < 101) {
+	while (matches_remain > 0 && matches_remain < 101) {
 		if (turn == 2) {
 			turn = turn_inversion(turn);
 			strategy(matches_remain, first, &buffer, input);
