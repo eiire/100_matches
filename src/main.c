@@ -11,7 +11,7 @@ int main()
 	while (matches_remain >= 0 && matches_remain < 101) {
 		if (turn == 2) {
 			turn = turn_inversion(turn);
-			strategy(matches_remain, first, &buffer);
+			strategy(matches_remain, first, &buffer, input);
 			matches_remain = matches_remain - buffer;
 			printf("Я взял %d сталось %d. Твой ход!\n", buffer, matches_remain);
 		} else {

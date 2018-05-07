@@ -17,7 +17,7 @@ int check_turn()
 
 int check_input(int ramain)
 {
-	if (ramain >= 2 && ramain <= 10) {
+	if (ramain >= 1 && ramain <= 10) {
 		return 1;
 	} else {
 		return 0;
@@ -33,59 +33,63 @@ int turn_inversion(int turn)
 	}
 }
 
-void strategy(int matches_remain, int first, int *buffer)
+void strategy(int matches_remain, int first, int *buffer, int input)
 {
- 	if (matches_remain > 12) {
- 		if (89 < matches_remain && matches_remain >= 78) {
+ 	if (matches_remain >= 12) {
+ 		if (89 < matches_remain) {
  			if (first == 2) {
  				*buffer = rand() % 10 + 1;
  			} else {
  				*buffer = matches_remain - 89;
  			}
- 		} else if (78 < matches_remain && matches_remain >= 78) {
+ 		} else if (78 < matches_remain) {
  			if (first == 2) {
  				*buffer = rand() % 10 + 1;
  			} else {	
  				*buffer = matches_remain - 78;
  			}
- 		} else if (67 < matches_remain && matches_remain >= 67) {
+ 		} else if (67 < matches_remain) {
  			if (first == 2) {
  				*buffer = rand() % 10 + 1;
  			} else {
  				*buffer = matches_remain - 67;
  			}
- 		} else if (56 < matches_remain && matches_remain >= 56) {
+ 		} else if (56 < matches_remain) {
  			if (first == 2) {
  				*buffer = rand() % 10 + 1;
  			} else {
  				*buffer = matches_remain - 56;
  			}
- 		} else if (45 < matches_remain && matches_remain >= 45) {
+ 		} else if (45 < matches_remain) {
  			if (first == 2) {
  				*buffer = rand() % 10 + 1;
  			} else {
  				*buffer = matches_remain - 45;
  			}
- 		} else if (34 < matches_remain && matches_remain >= 34) {
+ 		} else if (34 < matches_remain) {
  			if (first == 2) {
  				*buffer = rand() % 10 + 1;
  			} else {
  				*buffer = matches_remain - 34;
  			}
- 		} else if (23 < matches_remain && matches_remain >= 23) {
+ 		} else if (23 < matches_remain) {
  			if (first == 2) {
  				*buffer = rand() % 10 + 1;
  			} else {
  				*buffer = matches_remain - 23;
  			}
- 		} else if (12 < matches_remain && matches_remain >= 12) {
+ 		} else if (12 < matches_remain) {
  			if (first == 2) {
  				*buffer = rand() % 10 + 1;
  			} else {
  				*buffer = matches_remain - 12;
  			}
- 		}	
-    } else if (matches_remain <= 10) {
-  		*buffer = matches_remain - 1
-    }
+ 		}
+ 	} else if (matches_remain < 12) {
+ 		if (first == 2) {
+ 			*buffer = rand() % 10 + 1;
+ 		} else {
+ 			*buffer = 11 - input;
+ 		}
+ 	}
 }
