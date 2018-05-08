@@ -5,12 +5,13 @@ int check_turn()
 	int check;
 	scanf("%d", &check);
 
-	if (check == 1) {
+	if (check == 1 && check != '-') {
 		return 1;
-	} else if (check == 2) {
+	} else if (check == 2 && check != '-') {
 		return 2;
 	} else {
 		printf("Введено неверное значение, пожалуйста, повторите попытку: ");
+		while (getchar() != '\n');
 		return check_turn();
 	}
 }

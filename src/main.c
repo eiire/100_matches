@@ -16,6 +16,7 @@ int main()
 			printf("Я взял %d сталось %d. Твой ход!\n", buffer, matches_remain);
 		} else {
 			turn = turn_inversion(turn);
+			while(getchar() != '\n');
 			scanf("%d", &input);
 			stroke_check = check_input(input);
 			if (stroke_check == 1) {
