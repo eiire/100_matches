@@ -11,7 +11,7 @@ int check_turn()
 		return 2;
 	} else {
 		printf("Введено неверное значение, пожалуйста, повторите попытку: ");
-		while (getchar() != '\n');
+		while(getchar() != '\n');
 		return check_turn();
 	}
 }
@@ -34,65 +34,141 @@ int turn_inversion(int turn)
 	}
 }
 
-void strategy(int matches_remain, int first, int *buffer, int input)
+void strategy(int matches_remain, int first, int *buffer, int input, int *oshibka)
 {
- 	if (matches_remain >= 12) {
+ 	if (matches_remain >= 0) {
  		if (89 < matches_remain) {
  			if (first == 2) {
- 				*buffer = rand() % 10 + 1;
+				if (input + *buffer < 11 && input != 0) {
+					*buffer = 11 - (input + *buffer);
+					*oshibka = 1;
+				} else {
+ 					*buffer = rand() % 10 + 1;
+				}
  			} else {
  				*buffer = matches_remain - 89;
  			}
  		} else if (78 < matches_remain) {
  			if (first == 2) {
- 				*buffer = rand() % 10 + 1;
+ 				if (input + *buffer > 11 && *oshibka == 0) {
+  					*buffer = 22 - (input + *buffer);
+					*oshibka = 1;
+ 				} else if (*oshibka == 1) {
+					*buffer = matches_remain - 78;
+				} else {
+					*buffer = rand() % 10 + 1;;
+				}
  			} else {
  				*buffer = matches_remain - 78;
  			}
  		} else if (67 < matches_remain) {
- 			if (first == 2) {
- 				*buffer = rand() % 10 + 1;
+			if (first == 2) {
+				if (input + *buffer < 11 && *oshibka == 0) {
+					*buffer = 11 - (input + *buffer);
+					*oshibka = 1;
+				} else if (input + *buffer > 11 && *oshibka == 0) {
+					*buffer = 22 - (input + *buffer);
+					*oshibka = 1;
+				} else if (*oshibka == 1) {
+					*buffer = matches_remain - 67;
+				} else {
+					*buffer = rand() % 10 + 1;;
+				}
  			} else {
  				*buffer = matches_remain - 67;
  			}
  		} else if (56 < matches_remain) {
  			if (first == 2) {
- 				*buffer = rand() % 10 + 1;
+				if (input + *buffer < 11 && *oshibka == 0) {
+					*buffer = 11 - (input + *buffer);
+					*oshibka = 1;
+				} else if (input + *buffer > 11 && *oshibka == 0) {
+					*buffer = 22 - (input + *buffer);
+					*oshibka = 1;
+				} else if (*oshibka == 1) {
+					*buffer = matches_remain - 56;
+				} else {
+					*buffer = rand() % 10 + 1;;
+				}
  			} else {
  				*buffer = matches_remain - 56;
  			}
  		} else if (45 < matches_remain) {
  			if (first == 2) {
- 				*buffer = rand() % 10 + 1;
+				if (input + *buffer < 11 && *oshibka == 0) {
+					*buffer = 11 - (input + *buffer);
+					*oshibka = 1;
+				} else if (input + *buffer > 11 && *oshibka == 0) {
+					*buffer = 22 - (input + *buffer);
+					*oshibka = 1;
+				} else if (*oshibka == 1) {
+					*buffer = matches_remain - 45;
+				} else {
+					*buffer = rand() % 10 + 1;;
+				}
  			} else {
  				*buffer = matches_remain - 45;
  			}
  		} else if (34 < matches_remain) {
  			if (first == 2) {
- 				*buffer = rand() % 10 + 1;
+				if (input + *buffer < 11 && *oshibka == 0) {
+					*buffer = 11 - (input + *buffer);
+					*oshibka = 1;
+				} else if (input + *buffer > 11 && *oshibka == 0) {
+					*buffer = 22 - (input + *buffer);
+					*oshibka = 1;
+				} else if (*oshibka == 1) {
+					*buffer = matches_remain - 34;
+				} else {
+					*buffer = rand() % 10 + 1;;
+				}
  			} else {
  				*buffer = matches_remain - 34;
  			}
  		} else if (23 < matches_remain) {
  			if (first == 2) {
- 				*buffer = rand() % 10 + 1;
+				if (input + *buffer < 11 && *oshibka == 0) {
+					*buffer = 11 - (input + *buffer);
+					*oshibka = 1;
+				} else if (input + *buffer > 11 && *oshibka == 0) {
+					*buffer = 22 - (input + *buffer);
+					*oshibka = 1;
+				} else if (*oshibka == 1) {
+					*buffer = matches_remain - 23;
+				} else {
+					*buffer = rand() % 10 + 1;;
+				}
  			} else {
  				*buffer = matches_remain - 23;
  			}
  		} else if (12 < matches_remain) {
  			if (first == 2) {
- 				*buffer = rand() % 10 + 1;
+				if (input + *buffer < 11 && *oshibka == 0) {
+					*buffer = 11 - (input + *buffer);
+					*oshibka = 1;
+				} else if (input + *buffer > 11 && *oshibka == 0) {
+					*buffer = 22 - (input + *buffer);
+					*oshibka = 1;
+				} else if (*oshibka == 1) {
+					*buffer = matches_remain - 12;
+				} else {
+					*buffer = rand() % 10 + 1;;
+				}
  			} else {
  				*buffer = matches_remain - 12;
  			}
+ 		} else if (0 < matches_remain) {
+ 			if (first == 2) {
+				if (oshibka == 0) {
+ 					*buffer = rand() % 10 + 1;
+				} else {
+					*buffer = 11 - input;
+				}
+ 			} else {
+ 				*buffer = 11 - input;
+ 			}
  		}
- 	} else if (matches_remain < 12) {
- 		if (first == 2) {
- 			*buffer = rand() % 10 + 1;
- 		} else {
- 			*buffer = 11 - input;
- 		}
- 	}
+	}
 }
 
 void check_result(int turn, int matches_remain, int input)
