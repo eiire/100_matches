@@ -6,12 +6,12 @@ int main()
 	int turn = check_turn();
 	int first = turn;
 
-	int input = 0, stroke_check, matches_remain = 100, buffer = 0, oshibka = 0;
+	int input = 0, stroke_check, matches_remain = 100, buffer = 0, check_miscalculation = 0;
 
 	while (matches_remain > 0 && matches_remain < 101) {
 		if (turn == 2) {
 			turn = turn_inversion(turn);
-			strategy(matches_remain, first, &buffer, input, &oshibka);
+			strategy(matches_remain, first, &buffer, input, &check_miscalculation);
 			matches_remain = matches_remain - buffer;
 			printf("Я взял %d сталось %d. Твой ход!\n", buffer, matches_remain);
 		} else {
