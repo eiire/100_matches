@@ -3,9 +3,16 @@
 int main()
 {
 
+int row, col;
+const char *hello = "Welcome to the game 100 matches!";
+const char *robot = "I am a robot that will be against you";
+const char *choice = "Choose how you want to go: ";
+const char *won = "You won!";
+const char *lose = "You lose!";
+
 	initscr();	
 
-	getmaxyx(stdscr, row, col);
+	getmaxyx(stdscr, row, col); 
 
 	curs_set(0);
 	echo();
@@ -39,16 +46,25 @@ int main()
 			}
 		}
 	}
-
+while (true) {
+	for ( col = (getmaxx(stdscr) - strlen(lose)) ; col != 0 ; col-- ) {
+            clear();
+        	
 	if (turn == 2 && (matches_remain == 2 || matches_remain == 1
 			|| matches_remain == 0)) {
-		mvwprintw(stdscr, row / 2 , (col - strlen(won)) / 2, "%s", won);
+		mvaddstr(row / 2, col , won);
+		//mvwprintw(stdscr, row / 2 , (col - strlen(won)) / 2, "%s", won);
 	} else if (turn == 1 && matches_remain < 0) {
-		mvwprintw(stdscr, row / 2 , (col - strlen(lose)) / 2, "%s", lose);
+		mvaddstr(row / 2, col , lose);
+		//mvwprintw(stdscr, row / 2 , (col - strlen(lose)) / 2, "%s", lose);
 	} else {
-		mvwprintw(stdscr, row / 2 , (col - strlen(lose)) / 2, "%s", lose);
+		mvaddstr(row / 2, col , lose);
+		//mvwprintw(stdscr, row / 2, (col - strlen(lose)) / 2, "%s", lose);
 	}
-
+		refresh();
+            	msleep(100);
+	}
+}
 	getch();    
    	endwin();
 
