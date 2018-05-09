@@ -3,16 +3,16 @@
 int main()
 {
 
-int row, col;
-const char *hello = "Welcome to the game 100 matches!";
-const char *robot = "I am a robot that will be against you";
-const char *choice = "Choose how you want to go: ";
-const char *won = "You won!";
-const char *lose = "You lose!";
+	int row, col;
+	const char *hello = "Welcome to the game 100 matches!";
+	const char *robot = "I am a robot that will be against you";
+	const char *choice = "Choose how you want to go: ";
+	const char *won = "You won!";
+	const char *lose = "You lose!";
 
-	initscr();	
+	initscr();
 
-	getmaxyx(stdscr, row, col); 
+	getmaxyx(stdscr, row, col);
 
 	curs_set(0);
 	echo();
@@ -26,7 +26,7 @@ const char *lose = "You lose!";
 
 	int input, stroke_check, matches_remain = 100, buffer;
 
-	while (matches_remain >= 0 && matches_remain < 101 
+	while (matches_remain >= 0 && matches_remain < 101
 			&& matches_remain != 2 && matches_remain != 0) {
 		if (turn == 2) {
 			turn = turn_inversion(turn);
@@ -48,24 +48,21 @@ const char *lose = "You lose!";
 	}
 while (true) {
 	for ( col = (getmaxx(stdscr) - strlen(lose)) ; col != 0 ; col-- ) {
-            clear();
-        	
+		clear();
+
 	if (turn == 2 && (matches_remain == 2 || matches_remain == 1
 			|| matches_remain == 0)) {
 		mvaddstr(row / 2, col , won);
-		//mvwprintw(stdscr, row / 2 , (col - strlen(won)) / 2, "%s", won);
 	} else if (turn == 1 && matches_remain < 0) {
 		mvaddstr(row / 2, col , lose);
-		//mvwprintw(stdscr, row / 2 , (col - strlen(lose)) / 2, "%s", lose);
 	} else {
 		mvaddstr(row / 2, col , lose);
-		//mvwprintw(stdscr, row / 2, (col - strlen(lose)) / 2, "%s", lose);
 	}
 		refresh();
             	msleep(100);
 	}
 }
-	getch();    
+	getch();
    	endwin();
 
 	return 0;
