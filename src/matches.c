@@ -5,19 +5,20 @@ int check_turn()
 	int check;
 	scanf("%d", &check);
 
-	if (check == 1) {
+	if (check == 1 && check != '-') {
 		return 1;
-	} else if (check == 2) {
+	} else if (check == 2 && check != '-') {
 		return 2;
 	} else {
 		printf("Введено неверное значение, пожалуйста, повторите попытку: ");
+		while(getchar() != '\n');
 		return check_turn();
 	}
 }
 
 int check_input(int ramain)
 {
-	if (ramain >= 2 && ramain <= 10) {
+	if (ramain >= 1 && ramain <= 10) {
 		return 1;
 	} else {
 		return 0;
@@ -26,83 +27,157 @@ int check_input(int ramain)
 
 int turn_inversion(int turn)
 {
-	if(turn == 1) {
+	if (turn == 1) {
 		return 2;
 	} else {
 		return 1;
 	}
 }
 
-void strategy(int matches_remain, int first, int *buffer)
+void strategy(int matches_remain, int first, int *buffer, int input, int *check_miscalculation)
 {
- 	if (matches_remain > 12) {
- 		if (89 < matches_remain && matches_remain >= 78) {
+ 	if (matches_remain >= 0) {
+ 		if (89 < matches_remain) {
  			if (first == 2) {
- 				*buffer = rand() % 10 + 1;
- 				//return buffer;
+				if (input + *buffer < 11 && input != 0) {
+					*buffer = 11 - (input + *buffer);
+					*check_miscalculation = 1;
+				} else {
+ 					*buffer = rand() % 10 + 1;
+				}
  			} else {
  				*buffer = matches_remain - 89;
- 				//return buffer;
  			}
- 		} else if (78 < matches_remain && matches_remain >= 78) {
+ 		} else if (78 < matches_remain) {
  			if (first == 2) {
- 				*buffer = rand() % 10 + 1;
- 				//return buffer;
- 			} else {	
+ 				if (input + *buffer > 11 && *check_miscalculation == 0) {
+  					*buffer = 22 - (input + *buffer);
+					*check_miscalculation = 1;
+ 				} else if (*check_miscalculation == 1) {
+					*buffer = matches_remain - 78;
+				} else {
+					*buffer = rand() % 10 + 1;;
+				}
+ 			} else {
  				*buffer = matches_remain - 78;
- 				//return buffer;
  			}
- 		} else if (67 < matches_remain && matches_remain >= 67) {
- 			if (first == 2) {
- 				*buffer = rand() % 10 + 1;
- 				//return buffer;
+ 		} else if (67 < matches_remain) {
+			if (first == 2) {
+				if (input + *buffer < 11 && *check_miscalculation == 0) {
+					*buffer = 11 - (input + *buffer);
+					*check_miscalculation = 1;
+				} else if (input + *buffer > 11 && *check_miscalculation == 0) {
+					*buffer = 22 - (input + *buffer);
+					*check_miscalculation = 1;
+				} else if (*check_miscalculation == 1) {
+					*buffer = matches_remain - 67;
+				} else {
+					*buffer = rand() % 10 + 1;;
+				}
  			} else {
  				*buffer = matches_remain - 67;
- 				//return buffer;
  			}
- 		} else if (56 < matches_remain && matches_remain >= 56) {
+ 		} else if (56 < matches_remain) {
  			if (first == 2) {
- 				*buffer = rand() % 10 + 1;
- 				//return buffer;
+				if (input + *buffer < 11 && *check_miscalculation == 0) {
+					*buffer = 11 - (input + *buffer);
+					*check_miscalculation = 1;
+				} else if (input + *buffer > 11 && *check_miscalculation == 0) {
+					*buffer = 22 - (input + *buffer);
+					*check_miscalculation = 1;
+				} else if (*check_miscalculation == 1) {
+					*buffer = matches_remain - 56;
+				} else {
+					*buffer = rand() % 10 + 1;;
+				}
  			} else {
  				*buffer = matches_remain - 56;
- 				//return buffer;
  			}
- 		} else if (45 < matches_remain && matches_remain >= 45) {
+ 		} else if (45 < matches_remain) {
  			if (first == 2) {
- 				*buffer = rand() % 10 + 1;
- 				//return buffer;
+				if (input + *buffer < 11 && *check_miscalculation == 0) {
+					*buffer = 11 - (input + *buffer);
+					*check_miscalculation = 1;
+				} else if (input + *buffer > 11 && *check_miscalculation == 0) {
+					*buffer = 22 - (input + *buffer);
+					*check_miscalculation = 1;
+				} else if (*check_miscalculation == 1) {
+					*buffer = matches_remain - 45;
+				} else {
+					*buffer = rand() % 10 + 1;;
+				}
  			} else {
  				*buffer = matches_remain - 45;
- 				//return buffer;
  			}
- 		} else if (34 < matches_remain && matches_remain >= 34) {
+ 		} else if (34 < matches_remain) {
  			if (first == 2) {
- 				*buffer = rand() % 10 + 1;
- 				//return buffer;
+				if (input + *buffer < 11 && *check_miscalculation == 0) {
+					*buffer = 11 - (input + *buffer);
+					*check_miscalculation = 1;
+				} else if (input + *buffer > 11 && *check_miscalculation == 0) {
+					*buffer = 22 - (input + *buffer);
+					*check_miscalculation = 1;
+				} else if (*check_miscalculation == 1) {
+					*buffer = matches_remain - 34;
+				} else {
+					*buffer = rand() % 10 + 1;;
+				}
  			} else {
  				*buffer = matches_remain - 34;
- 				//return buffer;
  			}
- 		} else if (23 < matches_remain && matches_remain >= 23) {
+ 		} else if (23 < matches_remain) {
  			if (first == 2) {
- 				*buffer = rand() % 10 + 1;
- 				//return buffer;
+				if (input + *buffer < 11 && *check_miscalculation == 0) {
+					*buffer = 11 - (input + *buffer);
+					*check_miscalculation = 1;
+				} else if (input + *buffer > 11 && *check_miscalculation == 0) {
+					*buffer = 22 - (input + *buffer);
+					*check_miscalculation = 1;
+				} else if (*check_miscalculation == 1) {
+					*buffer = matches_remain - 23;
+				} else {
+					*buffer = rand() % 10 + 1;;
+				}
  			} else {
  				*buffer = matches_remain - 23;
- 				//return buffer;
  			}
- 		} else if (12 < matches_remain && matches_remain >= 12) {
+ 		} else if (12 < matches_remain) {
  			if (first == 2) {
- 				*buffer = rand() % 10 + 1;
- 				//return buffer;
+				if (input + *buffer < 11 && *check_miscalculation == 0) {
+					*buffer = 11 - (input + *buffer);
+					*check_miscalculation = 1;
+				} else if (input + *buffer > 11 && *check_miscalculation == 0) {
+					*buffer = 22 - (input + *buffer);
+					*check_miscalculation = 1;
+				} else if (*check_miscalculation == 1) {
+					*buffer = matches_remain - 12;
+				} else {
+					*buffer = rand() % 10 + 1;;
+				}
  			} else {
  				*buffer = matches_remain - 12;
- 				//return buffer;
  			}
- 		}	
-    } else if (matches_remain <= 10) {
-  		*buffer = matches_remain - 1;
-  		//return buffer;
-    }
+ 		} else if (0 < matches_remain) {
+ 			if (first == 2) {
+				if (*check_miscalculation == 0) {
+ 					*buffer = rand() % 10 + 1;
+				} else {
+					*buffer = 11 - input;
+				}
+ 			} else {
+ 				*buffer = 11 - input;
+ 			}
+ 		}
+	}
+}
+
+void check_result(int turn, int matches_remain, int input)
+{
+	if (turn == 2 && matches_remain <= 10 && input < 9 && matches_remain > 2) {
+		printf("Вы выиграли!\n");
+	} else if (turn == 1 && matches_remain < 0) {
+		printf("Вы выиграли!\n");
+	} else {
+		printf("Вы проиграли!\n");
+	}
 }

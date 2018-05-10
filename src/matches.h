@@ -7,6 +7,7 @@
 int check_turn();
 int turn_inversion(int turn);
 int check_input(int ramain);
-void strategy(int matches_remain, int first, int *buffer);
+void strategy(int matches_remain, int first, int *buffer, int input, int *check_miscalculation);
+void check_result(int turn, int matches_remain, int input);
 
 #endif
