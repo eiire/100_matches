@@ -1,4 +1,5 @@
 #include "matches.h"
+#include <time.h>
 
 int check_turn()
 {
@@ -11,7 +12,6 @@ int check_turn()
 		return 2;
 	} else {
 		printw("The entered value is incorrect, please try again: ");
-		while(getchar() != '\n');
 		return check_turn();
 	}
 }
@@ -36,6 +36,7 @@ int turn_inversion(int turn)
 
 void strategy(int matches_remain, int first, int *buffer, int input, int *check_miscalculation)
 {
+	srand(time(NULL));
  	if (matches_remain >= 0) {
  		if (89 < matches_remain) {
  			if (first == 2) {
@@ -178,6 +179,6 @@ int check_result(int turn, int matches_remain, int input)
 	} else if (turn == 1 && matches_remain <= 0) {
 		return 1;
 	} else {
-		return 2;
+		return 0;
 	}
 }

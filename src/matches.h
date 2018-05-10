@@ -1,12 +1,12 @@
 #ifndef MATCHES_H
 #define MATCHES_H
 
-#if defined(_WIN32) || defined(_WIN64) 
+#if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
     #define msleep(msec) Sleep(msec)
 #else
     #include <unistd.h>
-    #define msleep(msec) usleep(msec*1000)
+    #define msleep(msec) usleep(msec * 1000)
 #endif
 
 #include <ncurses.h>
