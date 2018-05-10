@@ -3,14 +3,14 @@
 int check_turn()
 {
 	int check;
-	scanf("%d", &check);
+	scanw("%d", &check);
 
 	if (check == 1 && check != '-') {
 		return 1;
 	} else if (check == 2 && check != '-') {
 		return 2;
 	} else {
-		printf("Введено неверное значение, пожалуйста, повторите попытку: ");
+		printw("The entered value is incorrect, please try again: ");
 		while(getchar() != '\n');
 		return check_turn();
 	}
@@ -171,13 +171,13 @@ void strategy(int matches_remain, int first, int *buffer, int input, int *check_
 	}
 }
 
-void check_result(int turn, int matches_remain, int input)
+int check_result(int turn, int matches_remain, int input)
 {
 	if (turn == 2 && matches_remain <= 10 && input < 9 && matches_remain > 2) {
-		printf("Вы выиграли!\n");
-	} else if (turn == 1 && matches_remain < 0) {
-		printf("Вы выиграли!\n");
+		return 1;
+	} else if (turn == 1 && matches_remain <= 0) {
+		return 1;
 	} else {
-		printf("Вы проиграли!\n");
+		return 2;
 	}
 }

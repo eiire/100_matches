@@ -1,35 +1,76 @@
 #include "matches.h"
+#include "name.h"
 
 int main()
 {
-	printf("Приветствую в игре 100 спичек, я робот, который будет против тебя играть! Выбери каким ты хочешь ходить: ");
+
+	int result, row, col, stroka = 0;
+
+	initscr();
+
+	getmaxyx(stdscr, row, col);
+
+	curs_set(0);
+	echo();
+
+	mvwprintw(stdscr, stroka = stroka + 3 , (col - strlen(hello)) / 2, "%s", hello);
+	mvwprintw(stdscr, stroka = stroka + 3 , (col - strlen(robot)) / 2, "%s", robot);
+	mvwprintw(stdscr, row / 2 , (col - strlen(choice)) / 2 , "%s", choice);
+
 	int turn = check_turn();
 	int first = turn;
 
 	int input = 0, stroke_check, matches_remain = 100, buffer = 0, check_miscalculation = 0;
+
+	clear();
 
 	while (matches_remain > 0 && matches_remain < 101) {
 		if (turn == 2) {
 			turn = turn_inversion(turn);
 			strategy(matches_remain, first, &buffer, input, &check_miscalculation);
 			matches_remain = matches_remain - buffer;
-			printf("Я взял %d сталось %d. Твой ход!\n", buffer, matches_remain);
+			if (matches_remain >= 96)
+				stroka = -1;
+			mvwprintw(stdscr, stroka = stroka + 1 , (col - strlen(left)) / 2 - 30, "%s", took);
+			mvwprintw(stdscr, stroka , (col - strlen(left)) / 2 - 22, "%d", buffer);
+			mvwprintw(stdscr, stroka , (col - strlen(left)) / 2 , "%s", left);
+			mvwprintw(stdscr, stroka , ((col - strlen(left)) / 2 + strlen(left) + 1) , "%d", matches_remain);
+			mvwprintw(stdscr, stroka , ((col - strlen(ymove)) / 2) + 30 , "%s", ymove);
 		} else {
 			turn = turn_inversion(turn);
-			while (getchar() != '\n');
-			scanf("%d", &input);
+			if (matches_remain == 100) {
+				mvwprintw(stdscr, stroka = 0 , (col - strlen(nunb)) / 2 , "%s", nunb);
+			}
+			scanw("%d", &input);
 			stroke_check = check_input(input);
 			if (stroke_check == 1) {
 				matches_remain = matches_remain - input;
-				printf("Осталось %d\n", matches_remain);
+				mvwprintw(stdscr, stroka = stroka + 1 , (col - strlen(left)) / 2, "%s", left);
+				mvwprintw(stdscr, stroka , (col - strlen(left)) / 2 + strlen(left) + 1, "%d", matches_remain);
 			} else {
 				turn = turn_inversion(turn);
-				printf("Вы ввели неверное значение, пожалуйста, повторите попытку: ");
+				printw("You entered an invalid value, please try again: ");
+				stroka = stroka + 1;
 			}
 		}
 	}
 
-	check_result(turn, matches_remain, input);
+	result = check_result(turn, matches_remain, input);
+	while (true) {
+		for ( col = (getmaxx(stdscr) - strlen(lose)) ; col != 0 ; col-- ) {
+			clear();
+			if (result == 1) {
+				mvaddstr(row / 2, col , won);
+			} if (result == 2) {
+				mvaddstr(row / 2, col , lose);
+			}
+		refresh();
+	    	msleep(100);
+		}
+	}
+
+	getch();
+   	endwin();
 
 	return 0;
 }
