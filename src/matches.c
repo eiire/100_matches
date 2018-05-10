@@ -1,4 +1,5 @@
 #include "matches.h"
+#include <time.h>
 
 int check_turn()
 {
@@ -35,6 +36,7 @@ int turn_inversion(int turn)
 
 void strategy(int matches_remain, int first, int *buffer, int input, int *check_miscalculation)
 {
+	srand(time(NULL));
  	if (matches_remain >= 0) {
  		if (89 < matches_remain) {
  			if (first == 2) {
