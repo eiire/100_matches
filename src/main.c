@@ -29,8 +29,9 @@ int main()
 			turn = turn_inversion(turn);
 			strategy(matches_remain, first, &buffer, input, &check_miscalculation);
 			matches_remain = matches_remain - buffer;
-			if (matches_remain >= 96)
+			if (matches_remain >= 96) {
 				stroka = -1;
+			}
 			mvwprintw(stdscr, stroka = stroka + 1 , (col - strlen(left)) / 2 - 30, "%s", took);
 			mvwprintw(stdscr, stroka , (col - strlen(left)) / 2 - 22, "%d", buffer);
 			mvwprintw(stdscr, stroka , (col - strlen(left)) / 2 , "%s", left);
@@ -41,8 +42,9 @@ int main()
 			if (matches_remain == 100) {
 				mvwprintw(stdscr, stroka = 0 , (col - strlen(nunb)) / 2 , "%s", nunb);
 			}
-			scanw("%d", &input);
-			stroke_check = check_input(input);
+			input = 0;                         // Так как видимо (предположение) scanw отбрасывает char символы и оставляет то, что было до,
+			scanw("%d", &input);			   // то перезапись интовым значением позволит отправить в функцию проверки именно 0,
+			stroke_check = check_input(input); // а не предыдущую цифру, сохранившуюся в переменной.
 			if (stroke_check == 1) {
 				matches_remain = matches_remain - input;
 				mvwprintw(stdscr, stroka = stroka + 1 , (col - strlen(left)) / 2, "%s", left);
@@ -57,11 +59,11 @@ int main()
 
 	result = check_result(turn, matches_remain, input);
 	while (true) {
-		for ( col = (getmaxx(stdscr) - strlen(lose)) ; col != 0 ; col-- ) {
+		for (col = (getmaxx(stdscr) - strlen(lose)); col != 0; col--) {
 			clear();
 			if (result == 1) {
 				mvaddstr(row / 2, col , won);
-			} if (result == 2) {
+			} else if (result == 2) {
 				mvaddstr(row / 2, col , lose);
 			}
 		refresh();

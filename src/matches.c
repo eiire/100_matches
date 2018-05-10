@@ -11,7 +11,6 @@ int check_turn()
 		return 2;
 	} else {
 		printw("The entered value is incorrect, please try again: ");
-		while(getchar() != '\n');
 		return check_turn();
 	}
 }
