@@ -4,11 +4,11 @@
 int main()
 {
 
-	int row, col, stroka = 0;
+	int stroka = 0;
 
 	initscr();
 
-	getmaxyx(stdscr, row, col);
+	getmaxyx(stdscr,int row,int col);
 
 	curs_set(0);
 	echo();
@@ -28,12 +28,12 @@ int main()
 			turn = turn_inversion(turn);
 			strategy(matches_remain, first, &buffer);
 			matches_remain = matches_remain - buffer;
-			if (matches_remain >= 96)			
+			if (matches_remain >= 96)
 				stroka = -1;
 			mvwprintw(stdscr, stroka = stroka + 1 , (col - strlen(left)) / 2 - 30, "%s", took);
 			mvwprintw(stdscr, stroka , (col - strlen(left)) / 2 - 22, "%d", buffer);
 			mvwprintw(stdscr, stroka , (col - strlen(left)) / 2 , "%s", left);
-			mvwprintw(stdscr, stroka , ((col - strlen(left)) / 2 + strlen(left) + 2) , "%d", matches_remain);
+			mvwprintw(stdscr, stroka , ((col - strlen(left)) / 2 + strlen(left) + 1) , "%d", matches_remain);
 			mvwprintw(stdscr, stroka , ((col - strlen(ymove)) / 2) + 30 , "%s", ymove);
 		} else {
 			turn = turn_inversion(turn);
@@ -48,6 +48,7 @@ int main()
 			} else {
 				turn = turn_inversion(turn);
 				printw("You entered an invalid value, please try again: ");
+				stroka = stroka + 1;
 			}
 		}
 	}
@@ -67,7 +68,7 @@ while (true) {
             	msleep(100);
 	}
 }
-	getch();
+		getch();
    	endwin();
 
 	return 0;
