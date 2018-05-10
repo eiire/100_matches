@@ -6,7 +6,7 @@
     #define msleep(msec) Sleep(msec)
 #else
     #include <unistd.h>
-    #define msleep(msec) usleep(msec*1000)
+    #define msleep(msec) usleep(msec * 1000)
 #endif
 
 #include <ncurses.h>

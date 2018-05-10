@@ -177,6 +177,6 @@ int check_result(int turn, int matches_remain, int input)
 	} else if (turn == 1 && matches_remain <= 0) {
 		return 1;
 	} else {
-		return 2;
+		return 0;
 	}
 }

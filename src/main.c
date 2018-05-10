@@ -4,7 +4,7 @@
 int main()
 {
 
-	int result, row, col, stroka = 0;
+	int row, col, stroka = 0;
 
 	initscr();
 
@@ -57,13 +57,12 @@ int main()
 		}
 	}
 
-	result = check_result(turn, matches_remain, input);
 	while (true) {
 		for (col = (getmaxx(stdscr) - strlen(lose)); col != 0; col--) {
 			clear();
-			if (result == 1) {
+			if (check_result(turn, matches_remain, input) == 1) {
 				mvaddstr(row / 2, col , won);
-			} else if (result == 2) {
+			} else {
 				mvaddstr(row / 2, col , lose);
 			}
 		refresh();
