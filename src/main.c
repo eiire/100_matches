@@ -27,10 +27,10 @@ int main()
 			strategy(matches_remain, first, &buffer, input, &check_miscalculation);
 			matches_remain = matches_remain - buffer;
 
-			if (matches_remain >= matches_remain - buffer) {
+			if (matches_remain > 89) {
 				stroka = -1;
 			}
-
+			
 			mvwprintw(stdscr, stroka = stroka + 1 , (col - strlen(left)) / 2 - 30, "%s", took);
 			mvwprintw(stdscr, stroka , (col - strlen(left)) / 2 - 22, "%d", buffer);
 			mvwprintw(stdscr, stroka , (col - strlen(left)) / 2 , "%s", left);
