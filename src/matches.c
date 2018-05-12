@@ -11,7 +11,9 @@ int check_turn()
 	} else if (check == 2 && check != '-') {
 		return 2;
 	} else {
+		attron(COLOR_PAIR(2));
 		printw("The entered value is incorrect, please try again: ");
+		attron(COLOR_PAIR(3));
 		return check_turn();
 	}
 }
