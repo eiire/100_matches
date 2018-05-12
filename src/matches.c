@@ -11,6 +11,7 @@ int check_turn()
 	} else if (check == 2 && check != '-') {
 		return 2;
 	} else {
+		clear();
 		attron(COLOR_PAIR(2));
 		printw("You entered an invalid value, please try again: ");
 		attron(COLOR_PAIR(3));

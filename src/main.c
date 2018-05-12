@@ -13,12 +13,12 @@ int main()
 	echo();
 	start_color();
 	init_pair(1, COLOR_GREEN, COLOR_BLACK);
-	init_pair(2, COLOR_RED, COLOR_BLACK);
+	init_pair(2, COLOR_RED, COLOR_YELLOW);
 	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
 	attron(COLOR_PAIR(3));
-	mvwprintw(stdscr, stroka = stroka + 3 , (col - strlen(hello)) / 2, "%s", hello);
-	mvwprintw(stdscr, stroka = stroka + 3 , (col - strlen(robot)) / 2, "%s", robot);
-	mvwprintw(stdscr, row / 2 , (col - strlen(choice)) / 2 , "%s", choice);
+	mvwprintw(stdscr, stroka += 3, (col - strlen(hello)) / 2, "%s", hello);
+	mvwprintw(stdscr, stroka += 3, (col - strlen(robot)) / 2, "%s", robot);
+	mvwprintw(stdscr, row / 2, (col - strlen(choice)) / 2 , "%s", choice);
 
 	int turn = check_turn(stroka, col);
 	clear();
@@ -35,15 +35,15 @@ int main()
 				stroka = -1;
 			}
 			
-			mvwprintw(stdscr, stroka = stroka + 1 , (col - strlen(left)) / 2 - 30, "%s", took);
-			mvwprintw(stdscr, stroka , (col - strlen(left)) / 2 - 22, "%d", buffer);
-			mvwprintw(stdscr, stroka , (col - strlen(left)) / 2 , "%s", left);
-			mvwprintw(stdscr, stroka , ((col - strlen(left)) / 2 + strlen(left) + 1) , "%d", matches_remain);
-			mvwprintw(stdscr, stroka , ((col - strlen(ymove)) / 2) + 30 , "%s", ymove);
+			mvwprintw(stdscr, ++stroka, (col - strlen(left)) / 2 - 26, "%s", took);
+			mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 - 18, "%d", buffer);
+			mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 , "%s", left);
+			mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 + strlen(left), "%d", matches_remain);
+			mvwprintw(stdscr, stroka, (col - strlen(ymove)) / 2 + 30, "%s", ymove);
 		} else {
 			turn = turn_inversion(turn);
 			if (matches_remain == 100) {
-				mvwprintw(stdscr, stroka = 0 , (col - strlen(nunb)) / 2 , "%s", nunb);
+				mvwprintw(stdscr, stroka = 0, (col - strlen(nunb)) / 2, "%s", nunb);
 			}
 
 			input = 0;
@@ -52,12 +52,15 @@ int main()
 
 			if (stroke_check == 1) {
 				matches_remain = matches_remain - input;
-				mvwprintw(stdscr, stroka = stroka + 1 , (col - strlen(left)) / 2, "%s", left);
-				mvwprintw(stdscr, stroka , (col - strlen(left)) / 2 + strlen(left) + 1, "%d", matches_remain);
+				mvwprintw(stdscr, ++stroka, (col - strlen(left)) / 2, "%s", left);
+				mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 + strlen(left), "%d", matches_remain);
 			} else {
 				turn = turn_inversion(turn);
+				clear();
+				mvwprintw(stdscr, stroka = 0, (col - strlen(left)) / 2, "%s", left);
+				mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 + strlen(left), "%d", matches_remain);
 				attron(COLOR_PAIR(2));
-				mvwprintw(stdscr, stroka = stroka + 1 , (col - strlen(entered)) / 2, "%s", entered);
+				mvwprintw(stdscr, ++stroka, (col - strlen(left)) / 2 - 26, "%s", entered);
 				attron(COLOR_PAIR(3));
 			}
 		}
@@ -66,21 +69,19 @@ int main()
 	while (true) {
 		for (col = (getmaxx(stdscr) - strlen(lose)); col != 0; col--) {
 			clear();
-
 			if (check_result(turn, matches_remain, input) == 1) {
-				attron(COLOR_PAIR(1));				
-				mvaddstr(row / 2, col , won);
+					attron(COLOR_PAIR(1));	
+					mvaddstr(row / 2, col, won);
 			} else {
 				attron(COLOR_PAIR(2));	
-				mvaddstr(row / 2, col , lose);
+				mvaddstr(row / 2, col, lose);
 			}
 			
-		refresh();
-	    	msleep(100);
+			refresh();
+	    		msleep(100);	
 		}
 	}
 
-	getch();
    	endwin();
 
 	return 0;
