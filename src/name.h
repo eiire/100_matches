@@ -13,6 +13,7 @@
     const char *robot = "I am a robot that will be against you!";
     const char *choice = "Choose how you want to go: ";
     const char *took = "I took: ";
+	const char *entered = "You entered an invalid value, please try again: ";
     const char *left = "Left: ";
     const char *ymove = "Your move: ";
     const char *won = "You won!";

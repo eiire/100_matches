@@ -12,15 +12,15 @@ int main()
 	curs_set(0);
 	echo();
 	start_color();
-	init_pair(1,  COLOR_GREEN,    COLOR_BLACK);
-	init_pair(2,  COLOR_RED,    COLOR_BLACK);
-	init_pair(3,  COLOR_YELLOW,    COLOR_BLACK);
+	init_pair(1, COLOR_GREEN, COLOR_BLACK);
+	init_pair(2, COLOR_RED, COLOR_BLACK);
+	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
 	attron(COLOR_PAIR(3));
 	mvwprintw(stdscr, stroka = stroka + 3 , (col - strlen(hello)) / 2, "%s", hello);
 	mvwprintw(stdscr, stroka = stroka + 3 , (col - strlen(robot)) / 2, "%s", robot);
 	mvwprintw(stdscr, row / 2 , (col - strlen(choice)) / 2 , "%s", choice);
 
-	int turn = check_turn();
+	int turn = check_turn(stroka, col);
 	clear();
 	int first = turn;
 	int input = 0, stroke_check, matches_remain = 100, buffer = 0, check_miscalculation = 0;
@@ -57,9 +57,8 @@ int main()
 			} else {
 				turn = turn_inversion(turn);
 				attron(COLOR_PAIR(2));
-				printw("You entered an invalid value, please try again: ");
+				mvwprintw(stdscr, stroka = stroka + 1 , (col - strlen(entered)) / 2, "%s", entered);
 				attron(COLOR_PAIR(3));
-				stroka = stroka + 1;
 			}
 		}
 	}

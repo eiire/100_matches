@@ -12,7 +12,7 @@ int check_turn()
 		return 2;
 	} else {
 		attron(COLOR_PAIR(2));
-		printw("The entered value is incorrect, please try again: ");
+		printw("You entered an invalid value, please try again: ");
 		attron(COLOR_PAIR(3));
 		return check_turn();
 	}
