@@ -6,15 +6,15 @@ int main()
 	int row, col, stroka = 0;
 
 	initscr();
-
-	getmaxyx(stdscr, row, col);
-
 	curs_set(0);
 	echo();
+	getmaxyx(stdscr, row, col);
+
 	start_color();
 	init_pair(1, COLOR_GREEN, COLOR_BLACK);
-	init_pair(2, COLOR_RED, COLOR_YELLOW);
+	init_pair(2, COLOR_RED, COLOR_BLACK);
 	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(4, COLOR_RED, COLOR_YELLOW);
 	attron(COLOR_PAIR(3));
 	mvwprintw(stdscr, stroka += 3, (col - strlen(hello)) / 2, "%s", hello);
 	mvwprintw(stdscr, stroka += 3, (col - strlen(robot)) / 2, "%s", robot);
@@ -73,12 +73,12 @@ int main()
 					attron(COLOR_PAIR(1));	
 					mvaddstr(row / 2, col, won);
 			} else {
-				attron(COLOR_PAIR(2));	
+				attron(COLOR_PAIR(4));	
 				mvaddstr(row / 2, col, lose);
 			}
 			
 			refresh();
-	    		msleep(100);	
+	    		msleep(130);	
 		}
 	}
 
