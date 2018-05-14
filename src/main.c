@@ -3,10 +3,11 @@
 
 int main()
 {
-	int row, col, stroka = 0;
-
+	int row, col, stroka = 0, flag = 0, number = 0, travel;
+	unsigned int i = 0;
 	initscr();
 	curs_set(0);
+	keypad (stdscr, true); 
 	echo();
 	getmaxyx(stdscr, row, col);
 
@@ -16,6 +17,46 @@ int main()
 	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(4, COLOR_RED, COLOR_YELLOW);
 	attron(COLOR_PAIR(3));
+
+	while (flag == 0) {
+	clear();
+
+	for (i = 0; i < 2; i++) {
+		if (i == number) {
+			attron(COLOR_PAIR(2));
+			mvwprintw(stdscr, row / 2 - 1 + i, (col - strlen(man)) / 2 - 2, ">");
+			attron(COLOR_PAIR(3));
+		}
+		else { 
+			mvwprintw(stdscr, row / 2 + i, (col - strlen(man)) / 2 - 2, " ");
+		}
+		mvwprintw(stdscr, row / 2 - 1, (col - strlen(man)) / 2, pc);
+		mvwprintw(stdscr, row / 2, (col - strlen(man)) / 2, man);
+		
+	}
+	
+		mvwprintw(stdscr, row - 2, 0, "Use the keys: key_up, key_down, enter to select...");
+		mvwprintw(stdscr, 8, (col - strlen(mode)) / 2, mode);
+	
+		switch (getch()) {
+		case KEY_UP:
+			if (number > 0)
+			number--;
+		break;
+	            
+		case KEY_DOWN:
+			if (number != 1)
+			number++;
+		break;
+	        
+		case 10:
+			flag = 1;
+			travel = number;
+		break;
+		}
+	}
+
+	clear();
 	mvwprintw(stdscr, stroka += 3, (col - strlen(hello)) / 2, "%s", hello);
 	mvwprintw(stdscr, stroka += 3, (col - strlen(robot)) / 2, "%s", robot);
 	mvwprintw(stdscr, row / 2, (col - strlen(choice)) / 2 , "%s", choice);
