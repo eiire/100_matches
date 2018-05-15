@@ -61,13 +61,20 @@ int main()
 	mvwprintw(stdscr, stroka += 3, (col - strlen(robot)) / 2, "%s", robot);
 	mvwprintw(stdscr, row / 2, (col - strlen(choice)) / 2 , "%s", choice);
 
-	int turn = check_turn(stroka, col);
+	int turn;
+	if (number == 0) {
+		turn = check_turn(stroka, col);
+	} else {
+		turn = 1;
+	}
+
 	clear();
 	int first = turn;
-	int input = 0, stroke_check, matches_remain = 100, buffer = 0, check_miscalculation = 0;
+	int input = 0, stroke_check, matches_remain = 100, buffer = 0, check_miscalculation = 0, fl;
 
 	while (matches_remain > 0 && matches_remain < 101) {
-		if (turn == 2) {
+		if (turn == 2 && number == 0) {
+			fl = 1;
 			turn = turn_inversion(turn);
 			strategy(matches_remain, first, &buffer, input, &check_miscalculation);
 			matches_remain = matches_remain - buffer;
@@ -81,7 +88,8 @@ int main()
 			mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 , "%s", left);
 			mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 + strlen(left), "%d", matches_remain);
 			mvwprintw(stdscr, stroka, (col - strlen(ymove)) / 2 + 30, "%s", ymove);
-		} else {
+		} else if (turn == 1 && number == 0) {
+			fl = 1;
 			turn = turn_inversion(turn);
 			if (matches_remain == 100) {
 				mvwprintw(stdscr, stroka = 0, (col - strlen(nunb)) / 2, "%s", nunb);
@@ -104,15 +112,42 @@ int main()
 				mvwprintw(stdscr, ++stroka, (col - strlen(left)) / 2 - 26, "%s", entered);
 				attron(COLOR_PAIR(3));
 			}
+		} else {
+			fl = 0;
+			if (matches_remain == 100) {
+				mvwprintw(stdscr, stroka = 0, (col - strlen(nunb)) / 2, "%s", nunb);
+				scanw("%d", &input);
+				stroke_check = check_input(input);
+			} else {
+				input = 0;
+				printw(", enter the number: ");
+				scanw("%d", &input);
+				stroke_check = check_input(input);
+			}
+
+			if (stroke_check == 1) {
+				matches_remain = matches_remain - input;
+				mvwprintw(stdscr, ++stroka, (col - strlen(left)) / 2, "%s", left);
+				mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 + strlen(left), "%d", matches_remain);
+			} else {
+				clear();
+				mvwprintw(stdscr, stroka = 0, (col - strlen(left)) / 2, "%s", left);
+				mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 + strlen(left), "%d", matches_remain);
+				attron(COLOR_PAIR(2));
+				mvwprintw(stdscr, ++stroka, (col - strlen(left)) / 2 - 26, "%s", entered);
+				attron(COLOR_PAIR(3));
+			}
 		}
 	}
 
 	while (true) {
 		for (col = (getmaxx(stdscr) - strlen(lose)); col != 0; col--) {
 			clear();
-			if (check_result(turn, matches_remain, input) == 1) {
+			if (check_result(turn, matches_remain, input, fl) == 1) {
 					attron(COLOR_PAIR(1));	
 					mvaddstr(row / 2, col, won);
+			} else if (check_result(turn, matches_remain, input, fl) == 3){
+				printw("Game move!");
 			} else {
 				attron(COLOR_PAIR(4));	
 				mvaddstr(row / 2, col, lose);
