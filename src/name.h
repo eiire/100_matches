@@ -9,6 +9,9 @@
     #define msleep(msec) usleep(msec * 1000)
 #endif
 
+	const char *mode = "Select a game mode";
+	const char *man = "Man vs. Man";
+	const char *pc = "Man vs. PC";
     const char *hello = "Welcome to the game 100 matches!";
     const char *robot = "I am a robot that will be against you!";
     const char *choice = "Choose how you want to go: ";

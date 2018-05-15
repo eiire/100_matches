@@ -175,12 +175,14 @@ void strategy(int matches_remain, int first, int *buffer, int input, int *check_
 	}
 }
 
-int check_result(int turn, int matches_remain, int input)
+int check_result(int turn, int matches_remain, int input, int fl)
 {
-	if (turn == 2 && matches_remain <= 10 && input < 9 && matches_remain > 2) {
+	if (turn == 2 && matches_remain <= 10 && input < 9 && matches_remain > 2 && fl == 1) {
 		return 1;
-	} else if (turn == 1 && matches_remain <= 0) {
+	} else if (turn == 1 && matches_remain <= 0 && fl == 1) {
 		return 1;
+	} else if (fl == 0) {
+		return 3;
 	} else {
 		return 0;
 	}
