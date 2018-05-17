@@ -17,10 +17,13 @@
     const char *choice = "Choose how you want to go: ";
     const char *took = "I took: ";
 	const char *entered = "You entered an invalid value, please try again:";
-    const char *left = "Left: ";
+    const char *left = "Remainder: ";
     const char *ymove = "Your move: ";
     const char *won = "You won!";
     const char *lose = "You lose!";
-    const char *nunb = "Enter the number: ";
-
+    const char *numb = "Your number: ";
+    const char *over = "Game over! last loser =)";
+    const char *NUMBER = "E n t e r   t h e   n u m b e r: ";
+    const char *remaind = "R e m a i n d e r: ";
+    
 #endif
