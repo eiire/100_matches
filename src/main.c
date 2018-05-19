@@ -175,7 +175,7 @@ int main()
 
 	while (true) {
 		if (check_result(turn, matches_remain, input, fl) == 1) {
-			for (col = (getmaxy(stdscr) - strlen(won)); col != 0; col--) {
+			for (col = (getmaxx(stdscr) - strlen(won)); col != 0; col--) {
 				clear();
 				attron(COLOR_PAIR(1));	
 				mvaddstr(row / 2, col, won);
@@ -183,7 +183,7 @@ int main()
 				msleep(130);
 			}
 		} else if (check_result(turn, matches_remain, input, fl) == 3){
-			for (col = (getmaxy(stdscr) - strlen(over)); col != 0; col--) {
+			for (col = (getmaxx(stdscr) - strlen(over)); col != 0; col--) {
 				clear();
 				attron(COLOR_PAIR(4));	
 				mvaddstr(row / 2, col, over);
@@ -191,7 +191,7 @@ int main()
 				msleep(130);
 			}
 		} else {
-			for (col = (getmaxy(stdscr) - strlen(lose)); col != 0; col--) {
+			for (col = (getmaxx(stdscr) - strlen(lose)); col != 0; col--) {
 				clear();
 				attron(COLOR_PAIR(4));	
 				mvaddstr(row / 2, col, lose);
