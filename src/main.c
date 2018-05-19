@@ -7,7 +7,7 @@ int main()
 	unsigned int i = 0;
 	initscr();
 	curs_set(0);
-	keypad (stdscr, true); 
+	keypad (stdscr, true);
 	echo();
 	getmaxyx(stdscr, row, col);
 
@@ -96,6 +96,7 @@ int main()
 			fl = 1;
 			turn = turn_inversion(turn);
 			if (matches_remain == 100) {
+				clear();
 				mvwprintw(stdscr, stroka = 0, (col - strlen(numb)) / 2, "%s", numb);
 			}
 
@@ -127,7 +128,6 @@ int main()
 				attron(COLOR_PAIR(2));
 				mvwprintw(stdscr, ++stroka, (col - strlen(entered)) / 2, "%s", entered);
 				attron(COLOR_PAIR(3));
-				//stroka++;
 			}
 		} else {
 			fl = 0;
@@ -135,7 +135,6 @@ int main()
 				stroka = -1;
 				mvwprintw(stdscr, ++stroka, (col - strlen(NUMBER)) / 2, "%s", NUMBER);
 				scanw("%d", &input);
-				//stroka++;
 				stroke_check = check_input(input);
 			} else {
 				if (stroka == getmaxy(stdscr)) {
@@ -166,7 +165,7 @@ int main()
 				mvwprintw(stdscr, stroka = 0, (col - strlen(remaind)) / 2 - 2, "%s", remaind);
 				mvwprintw(stdscr, stroka, (col - strlen(remaind)) / 2 + strlen(remaind) - 2, "%d", matches_remain);
 				attron(COLOR_PAIR(2));
-				mvwprintw(stdscr, stroka = 0, 3, "%s", entered);
+				mvwprintw(stdscr, stroka = 0, 0, "%s", entered);
 				++stroka;
 				attron(COLOR_PAIR(3));
 			}

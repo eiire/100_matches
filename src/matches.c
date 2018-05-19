@@ -15,7 +15,7 @@ int check_turn()
 		clear();
 		attron(COLOR_PAIR(2));
 		//mvwprintw(stdscr, 2, (getmaxx(stdscr) - strlen(entered)) / 2, entered);
-		printw("You entered an invalid value, please try again: ");
+		printw("Error, please try again: ");
 		attron(COLOR_PAIR(3));
 		return check_turn();
 		clear();
