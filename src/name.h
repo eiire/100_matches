@@ -17,6 +17,7 @@
     const char *choice = "Choose how you want to go: ";
     const char *took = "I took: ";
 	const char *entered = "Error, please try again: ";
+    const char *error = "Error, please try agian ";
     const char *left = "Remainder: ";
     const char *ymove = "Your move: ";
     const char *won = "You won!";

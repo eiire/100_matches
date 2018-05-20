@@ -159,13 +159,12 @@ int main()
 				matches_remain = matches_remain - input;
 				mvwprintw(stdscr, ++stroka, col / 2 - strlen(left) - 13, "%s", left);
 				mvwprintw(stdscr, stroka, col / 2 - 13, "%d", matches_remain);
-				//++stroka;
 			} else {
 				clear();
 				mvwprintw(stdscr, stroka = 0, (col - strlen(remaind)) / 2 - 2, "%s", remaind);
 				mvwprintw(stdscr, stroka, (col - strlen(remaind)) / 2 + strlen(remaind) - 2, "%d", matches_remain);
 				attron(COLOR_PAIR(2));
-				mvwprintw(stdscr, stroka = 0, 0, "%s", entered);
+				mvwprintw(stdscr, 0, 0, "%s", error);
 				++stroka;
 				attron(COLOR_PAIR(3));
 			}
