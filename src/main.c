@@ -1,13 +1,13 @@
-#include "matches.h"
 #include "name.h"
+#include "matches.h"
 
 int main()
 {
-	int row, col, stroka = 0, flag = 0, number = 0, travel;
+	int row, col, stroka = 0, flag = 0, number = 0;
 	unsigned int i = 0;
 	initscr();
 	curs_set(0);
-	keypad (stdscr, true); 
+	keypad (stdscr, true);
 	echo();
 	getmaxyx(stdscr, row, col);
 
@@ -20,7 +20,7 @@ int main()
 
 	while (flag == 0) {
 	clear();
-
+	
 	for (i = 0; i < 2; i++) {
 		if (i == number) {
 			attron(COLOR_PAIR(2));
@@ -34,9 +34,10 @@ int main()
 		mvwprintw(stdscr, row / 2, (col - strlen(man)) / 2, man);
 		
 	}
-	
+
+		mvwprintw(stdscr, row / 2 - 8, (col - strlen(hello)) / 2, "%s", hello);
 		mvwprintw(stdscr, row - 2, 0, "Use the keys: key_up, key_down, enter to select...");
-		mvwprintw(stdscr, 8, (col - strlen(mode)) / 2, mode);
+		mvwprintw(stdscr, row / 2 - 4, (col - strlen(mode)) / 2, mode);
 	
 		switch (getch()) {
 		case KEY_UP:
@@ -51,14 +52,12 @@ int main()
 	        
 		case 10:
 			flag = 1;
-			travel = number;
 		break;
 		}
 	}
 
 	clear();
-	mvwprintw(stdscr, stroka += 3, (col - strlen(hello)) / 2, "%s", hello);
-	mvwprintw(stdscr, stroka += 3, (col - strlen(robot)) / 2, "%s", robot);
+	mvwprintw(stdscr, row / 2 - 4, (col - strlen(robot)) / 2, "%s", robot);
 	mvwprintw(stdscr, row / 2, (col - strlen(choice)) / 2 , "%s", choice);
 
 	int turn;
@@ -82,17 +81,23 @@ int main()
 			if (matches_remain > 89) {
 				stroka = -1;
 			}
-			
 			mvwprintw(stdscr, ++stroka, (col - strlen(left)) / 2 - 26, "%s", took);
 			mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 - 18, "%d", buffer);
 			mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 , "%s", left);
 			mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 + strlen(left), "%d", matches_remain);
 			mvwprintw(stdscr, stroka, (col - strlen(ymove)) / 2 + 30, "%s", ymove);
 		} else if (turn == 1 && number == 0) {
+			if (stroka == getmaxy(stdscr)) {
+				clear();
+				stroka = 0;
+				mvwprintw(stdscr, ++stroka, col / 2 - strlen(left) - 13, "%s", left);
+				mvwprintw(stdscr, stroka, col / 2 - 13, "%d", matches_remain);
+			}
 			fl = 1;
 			turn = turn_inversion(turn);
 			if (matches_remain == 100) {
-				mvwprintw(stdscr, stroka = 0, (col - strlen(nunb)) / 2, "%s", nunb);
+				clear();
+				mvwprintw(stdscr, stroka = 0, (col - strlen(numb)) / 2, "%s", numb);
 			}
 
 			input = 0;
@@ -100,61 +105,97 @@ int main()
 			stroke_check = check_input(input);
 
 			if (stroke_check == 1) {
+				if (stroka == getmaxy(stdscr)) {
+					clear();
+					stroka = 0;
+					mvwprintw(stdscr, ++stroka, col / 2 - strlen(left) - 13, "%s", left);
+					mvwprintw(stdscr, stroka, col / 2 - 13, "%d", matches_remain);
+				}
 				matches_remain = matches_remain - input;
 				mvwprintw(stdscr, ++stroka, (col - strlen(left)) / 2, "%s", left);
 				mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 + strlen(left), "%d", matches_remain);
 			} else {
+				if (stroka == getmaxy(stdscr)) {
+					clear();
+					stroka = 0;
+					mvwprintw(stdscr, ++stroka, col / 2 - strlen(left) - 13, "%s", left);
+					mvwprintw(stdscr, stroka, col / 2 - 13, "%d", matches_remain);
+				}
 				turn = turn_inversion(turn);
 				clear();
 				mvwprintw(stdscr, stroka = 0, (col - strlen(left)) / 2, "%s", left);
 				mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 + strlen(left), "%d", matches_remain);
 				attron(COLOR_PAIR(2));
-				mvwprintw(stdscr, ++stroka, (col - strlen(left)) / 2 - 26, "%s", entered);
+				mvwprintw(stdscr, ++stroka, (col - strlen(entered)) / 2, "%s", entered);
 				attron(COLOR_PAIR(3));
 			}
 		} else {
 			fl = 0;
 			if (matches_remain == 100) {
-				mvwprintw(stdscr, stroka = 0, (col - strlen(nunb)) / 2, "%s", nunb);
+				stroka = -1;
+				mvwprintw(stdscr, ++stroka, (col - strlen(NUMBER)) / 2, "%s", NUMBER);
 				scanw("%d", &input);
 				stroke_check = check_input(input);
 			} else {
+				if (stroka == getmaxy(stdscr)) {
+					clear();
+					stroka = 0;
+					mvwprintw(stdscr, ++stroka, col / 2 - strlen(left) - 13, "%s", left);
+					mvwprintw(stdscr, stroka, col / 2 - 13, "%d", matches_remain);
+				}
 				input = 0;
-				printw(", enter the number: ");
+				mvwprintw(stdscr, stroka, col / 2 + 9, "%s", numb);
 				scanw("%d", &input);
 				stroke_check = check_input(input);
 			}
 
 			if (stroke_check == 1) {
+				if (stroka == getmaxy(stdscr)) {
+					clear();
+					stroka = 0;
+					mvwprintw(stdscr, ++stroka, col / 2 - strlen(left) - 13, "%s", left);
+					mvwprintw(stdscr, stroka, col / 2 - 13, "%d", matches_remain);
+				}
 				matches_remain = matches_remain - input;
-				mvwprintw(stdscr, ++stroka, (col - strlen(left)) / 2, "%s", left);
-				mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 + strlen(left), "%d", matches_remain);
+				mvwprintw(stdscr, ++stroka, col / 2 - strlen(left) - 13, "%s", left);
+				mvwprintw(stdscr, stroka, col / 2 - 13, "%d", matches_remain);
 			} else {
 				clear();
-				mvwprintw(stdscr, stroka = 0, (col - strlen(left)) / 2, "%s", left);
-				mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 + strlen(left), "%d", matches_remain);
+				mvwprintw(stdscr, stroka = 0, (col - strlen(remaind)) / 2 - 2, "%s", remaind);
+				mvwprintw(stdscr, stroka, (col - strlen(remaind)) / 2 + strlen(remaind) - 2, "%d", matches_remain);
 				attron(COLOR_PAIR(2));
-				mvwprintw(stdscr, ++stroka, (col - strlen(left)) / 2 - 26, "%s", entered);
+				mvwprintw(stdscr, 0, 0, "%s", error);
+				++stroka;
 				attron(COLOR_PAIR(3));
 			}
 		}
 	}
 
 	while (true) {
-		for (col = (getmaxx(stdscr) - strlen(lose)); col != 0; col--) {
-			clear();
-			if (check_result(turn, matches_remain, input, fl) == 1) {
-					attron(COLOR_PAIR(1));	
-					mvaddstr(row / 2, col, won);
-			} else if (check_result(turn, matches_remain, input, fl) == 3){
-				printw("Game move!");
-			} else {
+		if (check_result(turn, matches_remain, input, fl) == 1) {
+			for (col = (getmaxx(stdscr) - strlen(won)); col != 0; col--) {
+				clear();
+				attron(COLOR_PAIR(1));	
+				mvaddstr(row / 2, col, won);
+				refresh();
+				msleep(130);
+			}
+		} else if (check_result(turn, matches_remain, input, fl) == 3){
+			for (col = (getmaxx(stdscr) - strlen(over)); col != 0; col--) {
+				clear();
+				attron(COLOR_PAIR(4));	
+				mvaddstr(row / 2, col, over);
+				refresh();
+				msleep(130);
+			}
+		} else {
+			for (col = (getmaxx(stdscr) - strlen(lose)); col != 0; col--) {
+				clear();
 				attron(COLOR_PAIR(4));	
 				mvaddstr(row / 2, col, lose);
-			}
-			
-			refresh();
-	    		msleep(130);	
+				refresh();
+				msleep(130);
+			}	
 		}
 	}
 

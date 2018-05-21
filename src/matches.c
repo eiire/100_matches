@@ -1,5 +1,6 @@
 #include "matches.h"
 #include <time.h>
+//#include "name.h"
 
 int check_turn()
 {
@@ -13,9 +14,11 @@ int check_turn()
 	} else {
 		clear();
 		attron(COLOR_PAIR(2));
-		printw("You entered an invalid value, please try again: ");
+		//mvwprintw(stdscr, 2, (getmaxx(stdscr) - strlen(entered)) / 2, entered);
+		printw("Error, please try again: ");
 		attron(COLOR_PAIR(3));
 		return check_turn();
+		clear();
 	}
 }
 
