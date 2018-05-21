@@ -56,114 +56,19 @@ void strategy(int matches_remain, int first, int *buffer, int input, int *check_
  				*buffer = matches_remain - 89;
  			}
  		} else if (78 < matches_remain) {
- 			if (first == 2) {
- 				if (input + *buffer > 11 && *check_miscalculation == 0) {
-  					*buffer = 22 - (input + *buffer);
-					*check_miscalculation = 1;
- 				} else if (*check_miscalculation == 1) {
-					*buffer = matches_remain - 78;
-				} else {
-					*buffer = rand() % 10 + 1;;
-				}
- 			} else {
- 				*buffer = matches_remain - 78;
- 			}
+ 			strategy_move(matches_remain, first, buffer, input, check_miscalculation, 78);
  		} else if (67 < matches_remain) {
-			if (first == 2) {
-				if (input + *buffer < 11 && *check_miscalculation == 0) {
-					*buffer = 11 - (input + *buffer);
-					*check_miscalculation = 1;
-				} else if (input + *buffer > 11 && *check_miscalculation == 0) {
-					*buffer = 22 - (input + *buffer);
-					*check_miscalculation = 1;
-				} else if (*check_miscalculation == 1) {
-					*buffer = matches_remain - 67;
-				} else {
-					*buffer = rand() % 10 + 1;;
-				}
- 			} else {
- 				*buffer = matches_remain - 67;
- 			}
+			strategy_move(matches_remain, first, buffer, input, check_miscalculation, 67);
  		} else if (56 < matches_remain) {
- 			if (first == 2) {
-				if (input + *buffer < 11 && *check_miscalculation == 0) {
-					*buffer = 11 - (input + *buffer);
-					*check_miscalculation = 1;
-				} else if (input + *buffer > 11 && *check_miscalculation == 0) {
-					*buffer = 22 - (input + *buffer);
-					*check_miscalculation = 1;
-				} else if (*check_miscalculation == 1) {
-					*buffer = matches_remain - 56;
-				} else {
-					*buffer = rand() % 10 + 1;;
-				}
- 			} else {
- 				*buffer = matches_remain - 56;
- 			}
+ 			strategy_move(matches_remain, first, buffer, input, check_miscalculation, 56);
  		} else if (45 < matches_remain) {
- 			if (first == 2) {
-				if (input + *buffer < 11 && *check_miscalculation == 0) {
-					*buffer = 11 - (input + *buffer);
-					*check_miscalculation = 1;
-				} else if (input + *buffer > 11 && *check_miscalculation == 0) {
-					*buffer = 22 - (input + *buffer);
-					*check_miscalculation = 1;
-				} else if (*check_miscalculation == 1) {
-					*buffer = matches_remain - 45;
-				} else {
-					*buffer = rand() % 10 + 1;;
-				}
- 			} else {
- 				*buffer = matches_remain - 45;
- 			}
+			strategy_move(matches_remain, first, buffer, input, check_miscalculation, 45);
  		} else if (34 < matches_remain) {
- 			if (first == 2) {
-				if (input + *buffer < 11 && *check_miscalculation == 0) {
-					*buffer = 11 - (input + *buffer);
-					*check_miscalculation = 1;
-				} else if (input + *buffer > 11 && *check_miscalculation == 0) {
-					*buffer = 22 - (input + *buffer);
-					*check_miscalculation = 1;
-				} else if (*check_miscalculation == 1) {
-					*buffer = matches_remain - 34;
-				} else {
-					*buffer = rand() % 10 + 1;;
-				}
- 			} else {
- 				*buffer = matches_remain - 34;
- 			}
+			strategy_move(matches_remain, first, buffer, input, check_miscalculation, 34);
  		} else if (23 < matches_remain) {
- 			if (first == 2) {
-				if (input + *buffer < 11 && *check_miscalculation == 0) {
-					*buffer = 11 - (input + *buffer);
-					*check_miscalculation = 1;
-				} else if (input + *buffer > 11 && *check_miscalculation == 0) {
-					*buffer = 22 - (input + *buffer);
-					*check_miscalculation = 1;
-				} else if (*check_miscalculation == 1) {
-					*buffer = matches_remain - 23;
-				} else {
-					*buffer = rand() % 10 + 1;;
-				}
- 			} else {
- 				*buffer = matches_remain - 23;
- 			}
+			strategy_move(matches_remain, first, buffer, input, check_miscalculation, 23);
  		} else if (12 < matches_remain) {
- 			if (first == 2) {
-				if (input + *buffer < 11 && *check_miscalculation == 0) {
-					*buffer = 11 - (input + *buffer);
-					*check_miscalculation = 1;
-				} else if (input + *buffer > 11 && *check_miscalculation == 0) {
-					*buffer = 22 - (input + *buffer);
-					*check_miscalculation = 1;
-				} else if (*check_miscalculation == 1) {
-					*buffer = matches_remain - 12;
-				} else {
-					*buffer = rand() % 10 + 1;;
-				}
- 			} else {
- 				*buffer = matches_remain - 12;
- 			}
+ 			strategy_move(matches_remain, first, buffer, input, check_miscalculation, 12);
  		} else if (0 < matches_remain) {
  			if (first == 2) {
 				if (*check_miscalculation == 0) {
@@ -174,6 +79,27 @@ void strategy(int matches_remain, int first, int *buffer, int input, int *check_
  			} else {
  				*buffer = 11 - input;
  			}
+ 		}
+	}
+}
+
+void strategy_move(int matches_remain, int first, int *buffer, int input, int *check_miscalculation, int rang) 
+{
+	if (rang < matches_remain) {
+ 		if (first == 2) {
+			if (input + *buffer < 11 && *check_miscalculation == 0) {
+				*buffer = 11 - (input + *buffer);
+				*check_miscalculation = 1;
+			} else if (input + *buffer > 11 && *check_miscalculation == 0) {
+				*buffer = 22 - (input + *buffer);
+				*check_miscalculation = 1;
+			} else if (*check_miscalculation == 1) {
+				*buffer = matches_remain - rang;
+			} else {
+				*buffer = rand() % 10 + 1;;
+			}
+		} else {
+ 			*buffer = matches_remain - rang;
  		}
 	}
 }
