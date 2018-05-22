@@ -42,5 +42,49 @@ CTEST(check_result, check_win_lose_end)
 	ASSERT_EQUAL(expected, check);
 }
 
+CTEST(strategy_move, correct_moves_of_man)
+{
+	int check_miscalculation = 0;   // Хранение значения, которое проверяет, допустил ли человек ошибку
+	int buffer = 8; // Примерный ход компьютера(в данном тесте не важно на, что изменится, важно, чтобы сумма 2-х ходов = 11)
+	// GIVEN
+	int expected = 0;
+	// WHEN
+	strategy_move(89, 2, &buffer, 3, &check_miscalculation, 78); // если ход компа был 8, то в этом тесте соответственно ход чел. = 3
+	int new_miscalculation = check_miscalculation; // (суть теста) Проверим, не изменилась ли проверочная переменная
+	// THEN
+	ASSERT_EQUAL(expected, new_miscalculation);
+}
 
+CTEST(strategy_move, incorrect_moves_of_man) 
+{
+	// Для случая < 11
+	int check_miscalculation = 0;
+	int buffer = 7;
 
+	// GIVEN
+	int expected_mis = 1; // Так как была совершина ошибка
+	int expected_buf = 2; // Ход компьютера, который зависит от 2-х предыдущих
+	// WHEN
+	strategy_move(79, 2, &buffer, 2, &check_miscalculation, 67);
+	int new_miscalculation = check_miscalculation;
+	int new_buffer = buffer;
+	// THEN
+	ASSERT_EQUAL(expected_mis, new_miscalculation);
+	ASSERT_EQUAL(expected_buf, new_buffer);
+
+	// Для случая > 11
+	check_miscalculation = 0;
+	buffer = 7;
+
+	// GIVEN
+	expected_mis = 1; // Так как была совершина ошибка
+	expected_buf = 8; // Ход компьютера, который зависит от 2-х предыдущих
+	// WHEN
+	strategy_move(79, 2, &buffer, 7, &check_miscalculation, 67);
+	new_miscalculation = check_miscalculation;
+	new_buffer = buffer;
+	// THEN
+	ASSERT_EQUAL(expected_mis, new_miscalculation);
+	ASSERT_EQUAL(expected_buf, new_buffer);
+
+}
