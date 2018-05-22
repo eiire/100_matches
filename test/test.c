@@ -86,5 +86,21 @@ CTEST(strategy_move, incorrect_moves_of_man)
 	// THEN
 	ASSERT_EQUAL(expected_mis, new_miscalculation);
 	ASSERT_EQUAL(expected_buf, new_buffer);
+}
 
+CTEST(strategy_move, desperate_strategy)
+{
+	int check_miscalculation = 0; // Просто потому что функция требует (в мейне изначально тоже равен 0)
+
+	int matches_remain = 85; // Ост. кол-во спичек, при этом мы уже перешли ко 2-му диапазаону
+	int buffer = 5; // Ход компьютера в предыдущий раз (ни на что не влияет в данном случае)
+	int input = 4; // Ход человека, сделанный после 89 ост. спичек
+
+	// GIVEN
+	int expected = 7; // Ход компьютера, который зависит от 2-х предыдущих
+	// WHEN
+	strategy_move(matches_remain, 1, &buffer, input, &check_miscalculation, 78);
+	int new_buffer = buffer;
+	// THEN
+	ASSERT_EQUAL(expected, new_buffer);
 }
