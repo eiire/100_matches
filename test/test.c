@@ -72,6 +72,7 @@ CTEST(strategy_move, incorrect_moves_of_man)
 	ASSERT_EQUAL(expected_mis, new_miscalculation);
 	ASSERT_EQUAL(expected_buf, new_buffer);
 
+
 	// Для случая > 11
 	check_miscalculation = 0;
 	buffer = 7;
@@ -90,6 +91,7 @@ CTEST(strategy_move, incorrect_moves_of_man)
 
 CTEST(strategy_move, desperate_strategy)
 {
+	// Для человека
 	int check_miscalculation = 0; // Просто потому что функция требует (в мейне изначально тоже равен 0)
 
 	int matches_remain = 85; // Ост. кол-во спичек, при этом мы уже перешли ко 2-му диапазаону
@@ -103,4 +105,25 @@ CTEST(strategy_move, desperate_strategy)
 	int new_buffer = buffer;
 	// THEN
 	ASSERT_EQUAL(expected, new_buffer);
+
+
+	// Для компьютера
+	check_miscalculation = 0; // Просто потому что функция требует (в мейне изначально тоже равен 0)
+
+	int checked_buffer;
+	matches_remain = 78; // Ост. кол-во спичек, при этом мы уже перешли ко 3-му диапазаону
+	buffer = 5; // Ход компьютера
+	input = 6; // Ход человека (корректный)
+
+	// GIVEN
+	expected = 1; 
+	// WHEN
+	strategy_move(matches_remain, 2, &buffer, input, &check_miscalculation, 67); // Порядок хода = 2(второе значение)
+	if (buffer >= 0 && buffer <= 10) { // Проверяем значение, которое получилось в следствии рандома
+		checked_buffer = 1;				// Так как в этом случае сумма ходов не обязательно должна была
+	} else {							// равняться 11
+		checked_buffer = 0;
+	}
+	// THEN
+	ASSERT_EQUAL(expected, checked_buffer);
 }
