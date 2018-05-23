@@ -3,13 +3,13 @@
 
 int main()
 {
-	int row, col, stroka = 0, flag = 0, number = 0;
+	int row_max, col_max, row = 0, flag = 0, number = 0;
 	unsigned int i = 0;
 	initscr();
 	curs_set(0);
 	keypad (stdscr, true);
 	echo();
-	getmaxyx(stdscr, row, col);
+	getmaxyx(stdscr, row_max, col_max);
 
 	start_color();
 	init_pair(1, COLOR_GREEN, COLOR_BLACK);
@@ -24,20 +24,20 @@ int main()
 	for (i = 0; i < 2; i++) {
 		if (i == number) {
 			attron(COLOR_PAIR(2));
-			mvwprintw(stdscr, row / 2 - 1 + i, (col - strlen(man)) / 2 - 2, ">");
+			mvwprintw(stdscr, row_max / 2 - 1 + i, (col_max - strlen(mode_man)) / 2 - 2, ">");
 			attron(COLOR_PAIR(3));
 		}
 		else { 
-			mvwprintw(stdscr, row / 2 + i, (col - strlen(man)) / 2 - 2, " ");
+			mvwprintw(stdscr, row_max / 2 + i, (col_max - strlen(mode_man)) / 2 - 2, " ");
 		}
-		mvwprintw(stdscr, row / 2 - 1, (col - strlen(man)) / 2, pc);
-		mvwprintw(stdscr, row / 2, (col - strlen(man)) / 2, man);
+		mvwprintw(stdscr, row_max / 2 - 1, (col_max - strlen(mode_man)) / 2, mode_pc);
+		mvwprintw(stdscr, row_max / 2, (col_max - strlen(mode_man)) / 2, mode_man);
 		
 	}
 
-		mvwprintw(stdscr, row / 2 - 8, (col - strlen(hello)) / 2, "%s", hello);
-		mvwprintw(stdscr, row - 2, 0, "Use the keys: key_up, key_down, enter to select...");
-		mvwprintw(stdscr, row / 2 - 4, (col - strlen(mode)) / 2, mode);
+		mvwprintw(stdscr, row_max / 2 - 8, (col_max - strlen(hello_message)) / 2, "%s", hello_message);
+		mvwprintw(stdscr, row_max - 2, 0, "%s", keys_message);
+		mvwprintw(stdscr, row_max / 2 - 4, (col_max - strlen(mode_message)) / 2, mode_message);
 	
 		switch (getch()) {
 		case KEY_UP:
@@ -57,12 +57,12 @@ int main()
 	}
 
 	clear();
-	mvwprintw(stdscr, row / 2 - 4, (col - strlen(robot)) / 2, "%s", robot);
-	mvwprintw(stdscr, row / 2, (col - strlen(choice)) / 2 , "%s", choice);
+	mvwprintw(stdscr, row_max / 2 - 4, (col_max - strlen(robot_message)) / 2, "%s", robot_message);
+	mvwprintw(stdscr, row_max / 2, (col_max - strlen(choice_message)) / 2 , "%s", choice_message);
 
 	int turn;
 	if (number == 0) {
-		turn = check_turn(stroka, col);
+		turn = check_turn(row, col_max);
 	} else {
 		turn = 1;
 	}
@@ -79,25 +79,25 @@ int main()
 			matches_remain = matches_remain - buffer;
 
 			if (matches_remain > 89) {
-				stroka = -1;
+				row = -1;
 			}
-			mvwprintw(stdscr, ++stroka, (col - strlen(left)) / 2 - 26, "%s", took);
-			mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 - 18, "%d", buffer);
-			mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 , "%s", left);
-			mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 + strlen(left), "%d", matches_remain);
-			mvwprintw(stdscr, stroka, (col - strlen(ymove)) / 2 + 30, "%s", ymove);
+			mvwprintw(stdscr, ++row, (col_max - strlen(remainder_message)) / 2 - 26, "%s", took_message);
+			mvwprintw(stdscr, row, (col_max - strlen(remainder_message)) / 2 - 18, "%d", buffer);
+			mvwprintw(stdscr, row, (col_max - strlen(remainder_message)) / 2 , "%s", remainder_message);
+			mvwprintw(stdscr, row, (col_max + strlen(remainder_message)) / 2, "%d", matches_remain);
+			mvwprintw(stdscr, row, (col_max - strlen(ymove_message)) / 2 + 30, "%s", ymove_message);
 		} else if (turn == 1 && number == 0) {
-			if (stroka == getmaxy(stdscr)) {
+			if (row == getmaxy(stdscr)) {
 				clear();
-				stroka = 0;
-				mvwprintw(stdscr, ++stroka, col / 2 - strlen(left) - 13, "%s", left);
-				mvwprintw(stdscr, stroka, col / 2 - 13, "%d", matches_remain);
+				row = 0;
+				mvwprintw(stdscr, ++row, col_max / 2 - strlen(remainder_message) - 13, "%s", remainder_message);
+				mvwprintw(stdscr, row, col_max / 2 - 13, "%d", matches_remain);
 			}
 			fl = 1;
 			turn = turn_inversion(turn);
 			if (matches_remain == 100) {
 				clear();
-				mvwprintw(stdscr, stroka = 0, (col - strlen(numb)) / 2, "%s", numb);
+				mvwprintw(stdscr, row = 0, (col_max - strlen(numb_message)) / 2, "%s", numb_message);
 			}
 
 			input = 0;
@@ -105,73 +105,73 @@ int main()
 			stroke_check = check_input(input);
 
 			if (stroke_check == 1) {
-				if (stroka == getmaxy(stdscr)) {
+				if (row == getmaxy(stdscr)) {
 					clear();
-					stroka = 0;
-					mvwprintw(stdscr, ++stroka, col / 2 - strlen(left) - 13, "%s", left);
-					mvwprintw(stdscr, stroka, col / 2 - 13, "%d", matches_remain);
+					row = 0;
+					mvwprintw(stdscr, ++row, col_max / 2 - strlen(remainder_message) - 13, "%s", remainder_message);
+					mvwprintw(stdscr, row, col_max / 2 - 13, "%d", matches_remain);
 				}
 				matches_remain = matches_remain - input;
-				mvwprintw(stdscr, ++stroka, (col - strlen(left)) / 2, "%s", left);
-				mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 + strlen(left), "%d", matches_remain);
+				mvwprintw(stdscr, ++row, (col_max - strlen(remainder_message)) / 2, "%s", remainder_message);
+				mvwprintw(stdscr, row, (col_max + strlen(remainder_message)) / 2, "%d", matches_remain);
 			} else {
-				if (stroka == getmaxy(stdscr)) {
+				if (row == getmaxy(stdscr)) {
 					clear();
-					stroka = 0;
-					mvwprintw(stdscr, ++stroka, col / 2 - strlen(left) - 13, "%s", left);
-					mvwprintw(stdscr, stroka, col / 2 - 13, "%d", matches_remain);
+					row = 0;
+					mvwprintw(stdscr, ++row, col_max / 2 - strlen(remainder_message) - 13, "%s", remainder_message);
+					mvwprintw(stdscr, row, col_max / 2 - 13, "%d", matches_remain);
 				}
 				turn = turn_inversion(turn);
 				clear();
-				mvwprintw(stdscr, stroka = 0, (col - strlen(left)) / 2, "%s", left);
-				mvwprintw(stdscr, stroka, (col - strlen(left)) / 2 + strlen(left), "%d", matches_remain);
+				mvwprintw(stdscr, row = 0, (col_max - strlen(remainder_message)) / 2, "%s", remainder_message);
+				mvwprintw(stdscr, row, (col_max + strlen(remainder_message)) / 2, "%d", matches_remain);
 				attron(COLOR_PAIR(2));
-				mvwprintw(stdscr, ++stroka, (col - strlen(entered)) / 2, "%s", entered);
+				mvwprintw(stdscr, ++row, (col_max - strlen(errored_message)) / 2, "%s", errored_message);
 				attron(COLOR_PAIR(3));
 			}
 		} else {
 			fl = 0;
 			if (matches_remain == 100) {
-				stroka = -1;
-				mvwprintw(stdscr, ++stroka, (col - strlen(NUMBER)) / 2, "%s", NUMBER);
+				row = -1;
+				mvwprintw(stdscr, ++row, (col_max - strlen(enter_message)) / 2, "%s", enter_message);
 				scanw("%d", &input);
 				stroke_check = check_input(input);
 			} else {
-				if (stroka == getmaxy(stdscr)) {
+				if (row == getmaxy(stdscr)) {
 					clear();
-					stroka = 0;
-					mvwprintw(stdscr, ++stroka, col / 2 - strlen(left) - 13, "%s", left);
-					mvwprintw(stdscr, stroka, col / 2 - 13, "%d", matches_remain);
+					row = 0;
+					mvwprintw(stdscr, ++row, col_max / 2 - strlen(remainder_message) - 13, "%s", remainder_message);
+					mvwprintw(stdscr, row, col_max / 2 - 13, "%d", matches_remain);
 				}
 				input = 0;
-				mvwprintw(stdscr, stroka, col / 2 + 9, "%s", numb);
+				mvwprintw(stdscr, row, col_max / 2 + 9, "%s", numb_message);
 				scanw("%d", &input);
 				stroke_check = check_input(input);
 			}
 
 			if (stroke_check == 1) {
-				if (stroka == getmaxy(stdscr)) {
+				if (row == getmaxy(stdscr)) {
 					clear();
-					stroka = 0;
-					mvwprintw(stdscr, ++stroka, col / 2 - strlen(left) - 13, "%s", left);
-					mvwprintw(stdscr, stroka, col / 2 - 13, "%d", matches_remain);
+					row = 0;
+					mvwprintw(stdscr, ++row, col_max / 2 - strlen(remainder_message) - 13, "%s", remainder_message);
+					mvwprintw(stdscr, row, col_max / 2 - 13, "%d", matches_remain);
 				}
 				matches_remain = matches_remain - input;
-				mvwprintw(stdscr, ++stroka, col / 2 - strlen(left) - 13, "%s", left);
-				mvwprintw(stdscr, stroka, col / 2 - 13, "%d", matches_remain);
+				mvwprintw(stdscr, ++row, col_max / 2 - strlen(remainder_message) - 13, "%s", remainder_message);
+				mvwprintw(stdscr, row, col_max / 2 - 13, "%d", matches_remain);
 			} else {
 				clear();
-				mvwprintw(stdscr, stroka = 0, (col - strlen(remaind)) / 2 - 2, "%s", remaind);
-				mvwprintw(stdscr, stroka, (col - strlen(remaind)) / 2 + strlen(remaind) - 2, "%d", matches_remain);
+				mvwprintw(stdscr, row = 0, (col_max - strlen(remainder_message)) / 2 - 2, "%s", remainder_message);
+				mvwprintw(stdscr, row, (col_max + strlen(remainder_message)) / 2 - 2, "%d", matches_remain);
 				attron(COLOR_PAIR(2));
-				mvwprintw(stdscr, 0, 0, "%s", error);
-				++stroka;
+				mvwprintw(stdscr, 0, 0, "%s", error_message);
+				++row;
 				attron(COLOR_PAIR(3));
 			}
 		}
 	}
 
-	loked_result(turn, matches_remain, input, fl, col, row, won, lose, over);
+	loked_result(turn, matches_remain, input, fl, col_max, row_max, won, lose, over);
 
    	endwin();
 

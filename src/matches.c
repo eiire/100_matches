@@ -1,6 +1,5 @@
 #include "matches.h"
 #include <time.h>
-//#include "name.h"
 
 int check_turn()
 {
@@ -14,7 +13,6 @@ int check_turn()
 	} else {
 		clear();
 		attron(COLOR_PAIR(2));
-		//mvwprintw(stdscr, 2, (getmaxx(stdscr) - strlen(entered)) / 2, entered);
 		printw("Error, please try again: ");
 		attron(COLOR_PAIR(3));
 		return check_turn();
@@ -117,30 +115,30 @@ int check_result(int turn, int matches_remain, int input, int fl)
 	}
 }
 
-void loked_result(int turn, int matches_remain, int input, int fl, int col, int row, const char *won, const char *lose, const char *over) 
+void loked_result(int turn, int matches_remain, int input, int fl, int col_max, int row_max, const char *won, const char *lose, const char *over) 
 {
 	while (true) {
 		if (check_result(turn, matches_remain, input, fl) == 1) {
-			for (col = (getmaxx(stdscr) - strlen(won)); col != 0; col--) {
+			for (col_max = (getmaxx(stdscr) - strlen(won)); col_max != 0; col_max--) {
 				clear();
 				attron(COLOR_PAIR(1));	
-				mvaddstr(row / 2, col, won);
+				mvaddstr(row_max / 2, col_max, won);
 				refresh();
 				msleep(130);
 			}
 		} else if (check_result(turn, matches_remain, input, fl) == 3){
-			for (col = (getmaxx(stdscr) - strlen(over)); col != 0; col--) {
+			for (col_max = (getmaxx(stdscr) - strlen(over)); col_max != 0; col_max--) {
 				clear();
 				attron(COLOR_PAIR(4));	
-				mvaddstr(row / 2, col, over);
+				mvaddstr(row_max / 2, col_max, over);
 				refresh();
 				msleep(130);
 			}
 		} else {
-			for (col = (getmaxx(stdscr) - strlen(lose)); col != 0; col--) {
+			for (col_max = (getmaxx(stdscr) - strlen(lose)); col_max != 0; col_max--) {
 				clear();
 				attron(COLOR_PAIR(4));	
-				mvaddstr(row / 2, col, lose);
+				mvaddstr(row_max / 2, col_max, lose);
 				refresh();
 				msleep(130);
 			}	
