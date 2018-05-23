@@ -96,7 +96,7 @@ void strategy_move(int matches_remain, int first, int *buffer, int input, int *c
 			} else if (*check_miscalculation == 1) {
 				*buffer = matches_remain - rang;
 			} else {
-				*buffer = rand() % 10 + 1;;
+				*buffer = rand() % 10 + 1;
 			}
 		} else {
  			*buffer = matches_remain - rang;
