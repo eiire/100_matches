@@ -1,14 +1,6 @@
 #ifndef NAME_H
 #define NAME_H
 
-#if defined(_WIN32) || defined(_WIN64)
-    #include <windows.h>
-    #define msleep(msec) Sleep(msec)
-#else
-    #include <unistd.h>
-    #define msleep(msec) usleep(msec * 1000)
-#endif
-
 	const char *mode = "Select a game mode";
 	const char *man = "Man vs. Man";
 	const char *pc = "Man vs. PC";

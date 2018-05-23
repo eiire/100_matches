@@ -171,33 +171,7 @@ int main()
 		}
 	}
 
-	while (true) {
-		if (check_result(turn, matches_remain, input, fl) == 1) {
-			for (col = (getmaxx(stdscr) - strlen(won)); col != 0; col--) {
-				clear();
-				attron(COLOR_PAIR(1));	
-				mvaddstr(row / 2, col, won);
-				refresh();
-				msleep(130);
-			}
-		} else if (check_result(turn, matches_remain, input, fl) == 3){
-			for (col = (getmaxx(stdscr) - strlen(over)); col != 0; col--) {
-				clear();
-				attron(COLOR_PAIR(4));	
-				mvaddstr(row / 2, col, over);
-				refresh();
-				msleep(130);
-			}
-		} else {
-			for (col = (getmaxx(stdscr) - strlen(lose)); col != 0; col--) {
-				clear();
-				attron(COLOR_PAIR(4));	
-				mvaddstr(row / 2, col, lose);
-				refresh();
-				msleep(130);
-			}	
-		}
-	}
+	loked_result(turn, matches_remain, input, fl, col, row, won, lose, over);
 
    	endwin();
 
