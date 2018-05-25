@@ -1,20 +1,18 @@
 #include <ctest.h>
 #include <matches.h>
 
-CTEST(check_queue, check_turn)
+CTEST(check_queue, turn_inversion)
 {
 	// GIVEN
 	int check = turn_inversion(1);
+	int check2 = turn_inversion(2);
+
 	// WHEN
 	int expected = 2;
+	int expected2 = 1;
+	
 	// THEN
 	ASSERT_EQUAL(expected, check);
-
-	// GIVEN
-	int check2 = turn_inversion(2);
-	// WHEN
-	int expected2 = 1;
-	// THEN
 	ASSERT_EQUAL(expected2, check2);
 }
 
@@ -126,4 +124,74 @@ CTEST(strategy_move, desperate_strategy)
 	}
 	// THEN
 	ASSERT_EQUAL(expected, checked_buffer);
+}
+
+CTEST(check_ramain, check_input)
+{
+	//GIVEN
+	int turn = check_input(0);
+	int turn1 = check_input(1);
+	int turn2 = check_input(2);
+	int turn3 = check_input(9);
+	int turn4 = check_input(10);
+	int turn5 = check_input(11);
+	int turn6 = check_input(-1);
+
+	//WHEN
+	int expected = 1;
+	int expected1 = 0;
+
+	//THEN
+	ASSERT_EQUAL(expected1, turn);
+	ASSERT_EQUAL(expected, turn1);
+	ASSERT_EQUAL(expected, turn2);
+	ASSERT_EQUAL(expected, turn3);
+	ASSERT_EQUAL(expected, turn4);
+	ASSERT_EQUAL(expected1, turn5);
+	ASSERT_EQUAL(expected1, turn6);
+}
+
+CTEST(strategy, last_situation)
+{
+	//GIVEN
+	int check_miscalculation = 1;
+	int first = 2;
+	int matches_remain = 9;
+	int buffer = 8;
+	int input = 3;
+
+	//WHEN
+	int new_buffer = 8;
+	strategy(matches_remain, first, &buffer, input, &check_miscalculation);
+
+	//THEN
+	ASSERT_EQUAL(buffer, new_buffer);
+
+	//GIVEN
+	check_miscalculation = 0;
+	first = 2;
+	matches_remain = 11;
+	buffer = 5;
+	input = 1;
+
+	//WHEN
+	new_buffer = 10;
+	strategy(matches_remain, first, &buffer, input, &check_miscalculation);
+
+	//THEN
+	ASSERT_EQUAL(buffer, new_buffer);
+
+	//GIVEN
+	check_miscalculation = 0;
+	first = 1;
+	matches_remain = 12;
+	buffer = 5;
+	input = 6;
+
+	//WHEN
+	new_buffer = 5;
+	strategy(matches_remain, first, &buffer, input, &check_miscalculation);
+
+	//THEN
+	ASSERT_EQUAL(buffer, new_buffer);
 }
