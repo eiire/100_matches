@@ -69,10 +69,10 @@ void strategy(int matches_remain, int first, int *buffer, int input, int *check_
  			strategy_move(matches_remain, first, buffer, input, check_miscalculation, 12);
  		} else if (0 < matches_remain) {
  			if (first == 2) {
-				if (*check_miscalculation == 0) {
+				if (*check_miscalculation == 0 && input + *buffer == 11) {
  					*buffer = rand() % 10 + 1;
 				} else {
-					*buffer = 11 - input;
+					*buffer = matches_remain - 1;
 				}
  			} else {
  				*buffer = 11 - input;
@@ -94,7 +94,7 @@ void strategy_move(int matches_remain, int first, int *buffer, int input, int *c
 			} else if (*check_miscalculation == 1) {
 				*buffer = matches_remain - rang;
 			} else {
-				*buffer = rand() % 10 + 1;;
+				*buffer = rand() % 10 + 1;
 			}
 		} else {
  			*buffer = matches_remain - rang;
@@ -104,9 +104,7 @@ void strategy_move(int matches_remain, int first, int *buffer, int input, int *c
 
 int check_result(int turn, int matches_remain, int input, int fl)
 {
-	if (turn == 2 && matches_remain <= 10 && input < 9 && matches_remain > 2 && fl == 1) {
-		return 1;
-	} else if (turn == 1 && matches_remain <= 0 && fl == 1) {
+	if (turn == 1 && matches_remain <= 0 && fl == 1) {
 		return 1;
 	} else if (fl == 0) {
 		return 3;
