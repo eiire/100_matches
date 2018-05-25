@@ -1,2 +1,2 @@
 build/*.o
-bin/100_matches
+bin/*
