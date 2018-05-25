@@ -1,3 +1,5 @@
+
+
 #include "name.h"
 #include "matches.h"
 
@@ -69,11 +71,11 @@ int main()
 
 	clear();
 	int first = turn;
-	int input = 0, stroke_check, matches_remain = 100, buffer = 0, check_miscalculation = 0, fl;
+	int input = 0, stroke_check, matches_remain = 100, buffer = 0, check_miscalculation = 0, fl_result;
 
 	while (matches_remain > 0 && matches_remain < 101) {
 		if (turn == 2 && number == 0) {
-			fl = 1;
+			fl_result = 1;
 			turn = turn_inversion(turn);
 			strategy(matches_remain, first, &buffer, input, &check_miscalculation);
 			matches_remain = matches_remain - buffer;
@@ -93,7 +95,7 @@ int main()
 				mvwprintw(stdscr, ++row, col_max / 2 - strlen(remainder_message) - 13, "%s", remainder_message);
 				mvwprintw(stdscr, row, col_max / 2 - 13, "%d", matches_remain);
 			}
-			fl = 1;
+			fl_result = 1;
 			turn = turn_inversion(turn);
 			if (matches_remain == 100) {
 				clear();
@@ -130,7 +132,7 @@ int main()
 				attron(COLOR_PAIR(3));
 			}
 		} else {
-			fl = 0;
+			fl_result = 0;
 			if (matches_remain == 100) {
 				row = -1;
 				mvwprintw(stdscr, ++row, (col_max - strlen(enter_message)) / 2, "%s", enter_message);
@@ -171,7 +173,7 @@ int main()
 		}
 	}
 
-	loked_result(turn, matches_remain, input, fl, col_max, row_max, won, lose, over);
+	loked_result(turn, matches_remain, input, fl_result, col_max, row_max, won, lose, over);
 
    	endwin();
 

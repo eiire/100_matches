@@ -102,21 +102,21 @@ void strategy_move(int matches_remain, int first, int *buffer, int input, int *c
 	}
 }
 
-int check_result(int turn, int matches_remain, int input, int fl)
+int check_result(int turn, int matches_remain, int input, int fl_result)
 {
-	if (turn == 1 && matches_remain <= 0 && fl == 1) {
+	if (turn == 1 && matches_remain <= 0 && fl_result == 1) {
 		return 1;
-	} else if (fl == 0) {
+	} else if (fl_result == 0) {
 		return 3;
 	} else {
 		return 0;
 	}
 }
 
-void loked_result(int turn, int matches_remain, int input, int fl, int col_max, int row_max, const char *won, const char *lose, const char *over) 
+void loked_result(int turn, int matches_remain, int input, int fl_result, int col_max, int row_max, const char *won, const char *lose, const char *over) 
 {
 	while (true) {
-		if (check_result(turn, matches_remain, input, fl) == 1) {
+		if (check_result(turn, matches_remain, input, fl_result) == 1) {
 			for (col_max = (getmaxx(stdscr) - strlen(won)); col_max != 0; col_max--) {
 				clear();
 				attron(COLOR_PAIR(1));	
@@ -124,7 +124,7 @@ void loked_result(int turn, int matches_remain, int input, int fl, int col_max, 
 				refresh();
 				msleep(130);
 			}
-		} else if (check_result(turn, matches_remain, input, fl) == 3){
+		} else if (check_result(turn, matches_remain, input, fl_result) == 3){
 			for (col_max = (getmaxx(stdscr) - strlen(over)); col_max != 0; col_max--) {
 				clear();
 				attron(COLOR_PAIR(4));	

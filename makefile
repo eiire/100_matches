@@ -1,8 +1,5 @@
-test: ./bin/test
-	./bin/test
-
-
 All: bin/100_matches bin/test
+	./bin/test
 
 
 bin/100_matches: build/main.o build/matches.o
