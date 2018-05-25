@@ -104,7 +104,7 @@ void strategy_move(int matches_remain, int first, int *buffer, int input, int *c
 
 int check_result(int turn, int matches_remain, int input, int fl)
 {
-	if (turn == 1 && matches_remain <= 0 && fl == 1) { // !
+	if (turn == 1 && matches_remain <= 0 && fl == 1) {
 		return 1;
 	} else if (fl == 0) {
 		return 3;
